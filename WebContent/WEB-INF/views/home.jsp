@@ -775,7 +775,7 @@
                         <button type="button" class="btn btn-lg btn-block my-btn mt-2">REJOINDRE</button><br />
                     </div>
                 </form>
-            </div>
+            <Profile/div>
         </div>
     </div>
 

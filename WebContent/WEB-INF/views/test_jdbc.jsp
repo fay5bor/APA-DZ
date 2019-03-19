@@ -9,8 +9,8 @@
     <body>
         <h1>Tests JDBC</h1>
 
-        <c:forEach items="${ messages }" var="message" varStatus="boucle">
-            <p>${ boucle.count }. ${ message }</p>
+        <c:forEach items="${ ressources }" var="ressources" varStatus="boucle">
+			      <p>${ boucle.count }. ${ ressources }</p>
         </c:forEach>
     </body>
 </html>

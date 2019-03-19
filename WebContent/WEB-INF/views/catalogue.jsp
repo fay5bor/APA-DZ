@@ -1,18 +1,459 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width = device-width, initial-scale = 0.7">
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <title>Acceuil DZ APA</title>
-    <link rel="stylesheet" href="vendors/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        .search-container {
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<style>
+	body{
+    zoom: 80%;
+}
+ol, ul, li, p {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+
+ol, ul {
+    list-style: none;
+}
+
+
+/* nav bar css*/
+.nav-searchbar:focus{
+    border: 2px solid #2dd393;
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+ }
+.search-icon{
+    color: #fff;
+    background-color: #2dd393;
+    border-radius: 0 15px 15px 0;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    padding: 15px 10px 15px 10px;
+    margin-left: -3px
+}
+.my-btn-outline{
+    color:#2dd393;
+    border-color: #2dd393;
+}
+.my-btn-outline:hover, .my-btn-outline:focus, .my-btn-outline:active, .my-btn-outline.active, .open .dropdown-toggle.my-btn-outline {
+    background-color: #2dd393;
+    color:#FFF;
+    border-color: #2dd393;
+}
+.my-btn{
+    background-color: #2dd393;
+    color:#FFF;
+    border-color: #2dd393;
+} 
+.my-btn:hover, .my-btn:focus, .my-btn:active, .my-btn.active, .open .dropdown-toggle.my-btn {
+    background-color: #198159;
+    color:#FFF;
+    border-color: #1ea772;
+}
+.my-sec-text{
+    color: #2dd393
+}
+/* -------------------------------- 
+
+xsigin/signup popup 
+
+-------------------------------- */
+.cd-user-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(52, 54, 66, 0.9);
+    z-index: 3;
+    overflow-y: auto;
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity 0.3s 0, visibility 0 0.3s;
+    -moz-transition: opacity 0.3s 0, visibility 0 0.3s;
+    transition: opacity 0.3s 0, visibility 0 0.3s;
+  }
+  .cd-user-modal.is-visible {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: opacity 0.3s 0, visibility 0 0;
+    -moz-transition: opacity 0.3s 0, visibility 0 0;
+    transition: opacity 0.3s 0, visibility 0 0;
+  }
+  .cd-user-modal.is-visible .cd-user-modal-container {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+  }
+  
+  .cd-user-modal-container {
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    background: #FFF;
+    margin: 3em auto 4em;
+    cursor: auto;
+    border-radius: 0.25em;
+    -webkit-transform: translateY(-30px);
+    -moz-transform: translateY(-30px);
+    -ms-transform: translateY(-30px);
+    -o-transform: translateY(-30px);
+    transform: translateY(-30px);
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+  }
+  .cd-user-modal-container .cd-switcher:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .cd-user-modal-container .cd-switcher li {
+    width: 50%;
+    float: left;
+    text-align: center;
+  }
+  .cd-user-modal-container .cd-switcher li:first-child a {
+    border-radius: .25em 0 0 0;
+  }
+  .cd-user-modal-container .cd-switcher li:last-child a {
+    border-radius: 0 .25em 0 0;
+  }
+  .cd-user-modal-container .cd-switcher a {
+    display: block;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background: #c2c2c2;
+    color: #fff;
+    font-size: 20px;
+  }
+  .cd-user-modal-container .cd-switcher a.selected {
+    background: #2dd393;
+    color: #fff;
+  }
+  /* modal*/
+  .cd-form {
+    padding: 1.4em;
+  }
+  .cd-form .fieldset {
+    position: relative;
+    margin: 1.4em 0;
+  }
+  .cd-form .fieldset:first-child {
+    margin-top: 0;
+  }
+  .cd-form .fieldset:last-child {
+    margin-bottom: 0;
+  }
+  .cd-form input {
+    margin: 0;
+    padding: 0;
+    border-radius: 0.25em;
+  }
+  .cd-form input.full-width {
+    width: 100%;
+  }
+  .cd-form input.has-padding {
+    padding: 12px 20px 12px 50px;
+  }
+  .cd-form input.has-border {
+    border: 1px solid #d2d8d8;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+  }
+  .cd-form input.has-border:focus {
+    border-color: #2dd393;
+    box-shadow: 0 0 5px rgba(52, 54, 66, 0.1);
+    outline: none;
+  }
+  .cd-form input.has-error {
+    border: 1px solid #d76666;
+  }
+  .cd-form input[type=password] {
+    /* space left for the HIDE button */
+    padding-right: 65px;
+  }
+  
+  .no-touch .cd-form input[type=submit]:hover, .no-touch .cd-form input[type=submit]:focus {
+    background: #3599ae;
+    outline: none;
+  }
+  .cd-form .hide-password {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 6px 15px;
+    border-left: 1px solid #d2d8d8;
+    top: 50%;
+    bottom: auto;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 14px;
+    font-size: 0.875rem;
+    color: #343642;
+  }
+  .cd-form .cd-error-message {
+    display: inline-block;
+    position: absolute;
+    left: -5px;
+    bottom: -35px;
+    background: rgba(215, 102, 102, 0.9);
+    padding: .8em;
+    z-index: 2;
+    color: #FFF;
+    font-size: 13px;
+    font-size: 0.8125rem;
+    border-radius: 0.25em;
+    /* prevent click and touch events */
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity 0.2s 0, visibility 0 0.2s;
+    -moz-transition: opacity 0.2s 0, visibility 0 0.2s;
+    transition: opacity 0.2s 0, visibility 0 0.2s;
+  }
+  .cd-form .cd-error-message::after {
+    /* triangle */
+    content: '';
+    position: absolute;
+    left: 22px;
+    bottom: 100%;
+    height: 0;
+    width: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid rgba(215, 102, 102, 0.9);
+  }
+  .cd-form .cd-error-message.is-visible {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: opacity 0.2s 0, visibility 0 0;
+    -moz-transition: opacity 0.2s 0, visibility 0 0;
+    transition: opacity 0.2s 0, visibility 0 0;
+  }
+  #cd-login, #cd-signup, #cd-reset-password {
+    display: none;
+  }
+  
+  #cd-login.is-selected, #cd-signup.is-selected, #cd-reset-password.is-selected {
+    display: block;
+  }
+
+.cd-form-bottom-message {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -30px;
+  text-align: center;
+  font-size: 14px;
+  font-size: 0.875rem;
+}
+.cd-form-bottom-message a {
+  color: #FFF;
+  text-decoration: underline;
+}
+
+.cd-close-form {
+  /* form X button on top right */
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 0;
+  top: -40px;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+
+/* Devider css */
+.devider{
+    border-radius: 25px;
+    border-style: solid;
+    border-color: rgb(214, 214, 214);
+    border-width: thin;
+}
+/* Contact us css */
+.contact-us{
+    background-color: #43425d;
+    background-repeat: no-repeat;
+    color: #fff;
+
+}
+/* Banner css*/
+.banner-overlay {
+    background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url("../images/banner.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    color: #fff;
+}
+.my-link{
+    color: white;
+    text-decoration: none;
+}
+.my-link:hover{
+    color: white;
+    text-decoration: none;
+}
+
+.place-icon{
+    color: rgb(163, 163, 163);
+}
+.send-btn{
+    margin-left: -45px;
+}
+.copyright {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Emplacement  */
+.carousel {
+    width: 100%;
+}  
+.slide-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  background-image: none;
+}
+
+.carousel-control-next-icon:after
+{
+    content: '>';
+    margin-right: -180%;
+    font-size: 40px;
+    color: rgb(0, 0, 0);
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  margin-left: -180%;
+  font-size: 40px;
+  color: rgb(0, 0, 0);
+}
+
+@media only screen and (max-width: 600px) {
+    .nav-searchbar{
+        width: 50%;
+    }
+    .banner-overlay {
+        padding-top: 360px; /*312*/
+        padding-bottom:15px; /*30*/
+    }
+    .help{
+        padding-top: 100px;
+        padding-bottom: 160px;
+    }
+    .newsletter{
+        padding-top: 100px
+    }
+    .carousel {
+        width: 45%;
+    }
+
+} 
+@media only screen and (min-width: 600px) {
+    .banner-overlay {
+        padding-top: 360px; /*312*/
+        padding-bottom:15px; /*30*/
+    }
+    .help{
+        padding-top: 100px;
+        padding-bottom: 160px;
+    }
+    .newsletter{
+        padding-top: 100px
+    }
+    /*modal*/
+    .cd-user-modal-container {
+        margin: 4em auto;
+    }
+    .cd-user-modal-container .cd-switcher a {
+        height: 70px;
+        line-height: 70px;
+    }
+    .cd-form-message {
+        padding: 2em 2em 0;
+    }
+    .cd-form {
+        padding: 2em;
+    }
+    .cd-form .fieldset {
+       margin: 2em 0;
+    }
+      .cd-form .fieldset:first-child {
+        margin-top: 0;
+    }
+      .cd-form .fieldset:last-child {
+        margin-bottom: 0;
+    }
+      .cd-form input.has-padding {
+        padding: 16px 20px 16px 50px;
+    }
+      .cd-form input[type=submit] {
+        padding: 16px 0;
+    }
+}
+@media only screen and (min-width: 992px) { 
+    .banner-overlay {
+        padding-top: 312px; /*312 473px*/
+        padding-bottom:30px; /*30 60px*/
+    }
+    .help{
+        padding-top: 100px;
+        padding-bottom: 160px;
+    }
+    .newsletter{
+        padding-top: 150px
+    }
+    .social-media-icons{
+        padding-top: 150px;
+    }
+    /*modal*/
+    .cd-close-form {
+        display: none;
+    }    
+    
+    
+    
+} 
+.search-container {
             height: 70px;
         }
 
@@ -39,156 +480,17 @@
             border-top: 3px solid #2dd393;
             height: 100%
         }
-    </style>
+
+	
+	</style>
 </head>
 
+<!DOCTYPE html>
+<html lang="fr">
+
+
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light pl-5 pr-5">
-        <a class="navbar-brand" href="#">
-            <img src="images/applogo.png" width="60" height="60" alt="">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="navbarTogglerDemo01">
-
-            <ul class="navbar-nav mr-auto ml-md-5 ml-sm-0">
-
-                <li class="nav-item mr-5">
-                    <a class="nav-link" href="#">Ressources</a>
-                </li>
-                <li class="nav-item mr-5">
-                    <a class="nav-link" href="#">Instituts</a>
-                </li>
-                <li class="nav-item mr-5">
-                    <a class="nav-link" href="#">Reglementations</a>
-                </li>
-                <li class="nav-item mr-5">
-                    <a class="nav-link" href="#">A propos</a>
-                </li>
-
-
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control nav-searchbar" type="search" placeholder="Search" aria-label="Search">
-                <i class="fas fa-search search-icon mr-3"></i>
-            </form>
-            <a href="#0" class="cd-signin btn my-btn-outline connect-item mr-4">CONNECTER</a>
-
-
-        </div>
-
-        <div class="cd-user-modal">
-            <!-- this is the entire modal form, including the background -->
-            <div class="cd-user-modal-container">
-                <!-- this is the container wrapper -->
-                <ul class="cd-switcher">
-                    <li><a href="#0">Se connecter</a></li>
-                    <li><a href="#0">S'inscrire</a></li>
-                </ul>
-                <div id="cd-login">
-                    <!-- log in form -->
-                    <h1 class="text-center mt-5 my-sec-text">Connectez Vous</h1>
-                    <form class="cd-form">
-                        <p class="fieldset">
-                            <input class="full-width has-padding has-border" id="signin-email" type="email"
-                                placeholder="E-mail">
-                            <span class="cd-error-message">
-                                <!--Error message here!--></span>
-                        </p>
-
-                        <p class="fieldset">
-                            <input class="full-width has-padding has-border" id="signin-password" type="text"
-                                placeholder="Mot de passe">
-                            <a href="#0" class="hide-password">Hide</a>
-                            <span class="cd-error-message">
-                                <!--Error message here!--></span>
-                        </p>
-
-                        <p class="fieldset">
-                            <input type="checkbox" id="remember-me" checked>
-                            <label for="remember-me">Se souvenir de moi</label>
-                        </p>
-
-                        <p class="fieldset">
-                            <input class="full-width btn my-btn" type="submit" value="Login">
-                        </p>
-                    </form>
-
-                    <p class="cd-form-bottom-message"><a href="#0">Mot de passe oubli√©?</a></p>
-                    <!-- <a href="#0" class="cd-close-form">Close</a> -->
-                </div> <!-- cd-login -->
-
-                <div id="cd-signup">
-                    <!-- sign up form -->
-                    <h1 class="text-center mt-5 my-sec-text">Inscrivez vous</h1>
-                    <form class="cd-form">
-                        <p class="fieldset">
-                            <input class="full-width has-padding has-border" id="signup-name" type="text"
-                                placeholder="Nom">
-                            <span class="cd-error-message">
-                                <!--Error message here!--></span>
-                        </p>
-
-                        <p class="fieldset">
-                            <input class="full-width has-padding has-border" id="signup-username" type="text"
-                                placeholder="Username">
-                            <span class="cd-error-message">
-                                <!--Error message here!--></span>
-                        </p>
-
-                        <p class="fieldset">
-                            <input class="full-width has-padding has-border" id="signup-email" type="email"
-                                placeholder="E-mail">
-                            <span class="cd-error-message">
-                                <!--Error message here!--></span>
-                        </p>
-
-                        <p class="fieldset">
-                            <input class="full-width has-padding has-border" id="signup-password" type="text"
-                                placeholder="Mot de passe">
-                            <a href="#0" class="hide-password">Hide</a>
-                            <span class="cd-error-message">
-                                <!--Error message here!--></span>
-                        </p>
-
-                        <p class="fieldset">
-                            <input class="full-width has-padding btn my-btn" type="submit" value="S'inscrire">
-                        </p>
-                    </form>
-
-                    <!-- <a href="#0" class="cd-close-form">Close</a> -->
-                </div> <!-- cd-signup -->
-
-                <div id="cd-reset-password">
-                    <!-- reset password form -->
-                    <p class="cd-form-message">Mot de passe oubli√©? Entrez votre adresse mail s'il vous plait. Vous
-                        allez recevoir un lien pour r√©initialiser le mot de passe.</p>
-
-                    <form class="cd-form">
-                        <p class="fieldset">
-                            <input class="full-width has-padding has-border" id="reset-email" type="email"
-                                placeholder="E-mail">
-                            <span class="cd-error-message">
-                                <!--Error message here!--></span>
-                        </p>
-
-                        <p class="fieldset">
-                            <input class="full-width has-padding btn my-btn" type="submit" value="R√©initialiser">
-                        </p>
-                    </form>
-
-                    <p class="cd-form-bottom-message"><a href="#0">Retour au log-in</a></p>
-                </div> <!-- cd-reset-password -->
-                <a href="#0" class="cd-close-form">Close</a>
-            </div> <!-- cd-user-modal-container -->
-        </div> <!-- cd-user-modal -->
-
-    </nav>
-    <!--------------              /header                         ---------------->
-
+	<jsp:include page="parts/nav-bar2.jsp"></jsp:include>	
     <!--                     Catalogue                                              -->
     <div class="m-4">
         <!--                     Search                                              -->
@@ -209,7 +511,7 @@
         <div class="">
             <div class="row">
                 <div class="col-2">
-                    <h4>R√©gion</h4>
+                    <h4>RÈgion</h4>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="Nord">
                         <label class="custom-control-label" for="Nord">Nord</label><br>
@@ -227,7 +529,7 @@
                         <label class="custom-control-label" for="Est">Nord</label>
                     </div>
                     <br>
-                    <h4>Cat√©gorie</h4>
+                    <h4>CatÈgorie</h4>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="Forestiere">
                         <label class="custom-control-label" for="Nord">Forestiere</label><br>
@@ -256,7 +558,7 @@
                                     <div class="row">
                                         <div class="col-2"></div>
                                         <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">D√©tail</button>
+                                            <button type="button" class="btn btn-primary btn-block">DÈtail</button>
                                         </div>
                                     </div>
                                 </div>
@@ -271,7 +573,7 @@
                                     <div class="row">
                                         <div class="col-2"></div>
                                         <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">D√©tail</button>
+                                            <button type="button" class="btn btn-primary btn-block">DÈtail</button>
                                         </div>
                                     </div>
                                 </div>
@@ -286,54 +588,7 @@
                                     <div class="row">
                                         <div class="col-2"></div>
                                         <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">D√©tail</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row d-flex justify-content-around  mt-4">
-                        <div class="col-3">
-                            <div class="card">
-                                <img class="card-img-top" src="images/card.svg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Nom ressource1</h5>
-                                    <p class="card-text text-center">Description</p>
-                                    <div class="row">
-                                        <div class="col-2"></div>
-                                        <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">D√©tail</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="card">
-                                <img class="card-img-top" src="images/card.svg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Nom ressource1</h5>
-                                    <p class="card-text text-center">Description</p>
-                                    <div class="row">
-                                        <div class="col-2"></div>
-                                        <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">D√©tail</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="card">
-                                <img class="card-img-top" src="images/card.svg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Nom ressource1</h5>
-                                    <p class="card-text text-center">Description</p>
-                                    <div class="row">
-                                        <div class="col-2"></div>
-                                        <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">D√©tail</button>
+                                            <button type="button" class="btn btn-primary btn-block">DÈtail</button>
                                         </div>
                                     </div>
                                 </div>
@@ -350,7 +605,7 @@
                                     <div class="row">
                                         <div class="col-2"></div>
                                         <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">D√©tail</button>
+                                            <button type="button" class="btn btn-primary btn-block">DÈtail</button>
                                         </div>
                                     </div>
                                 </div>
@@ -365,7 +620,7 @@
                                     <div class="row">
                                         <div class="col-2"></div>
                                         <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">D√©tail</button>
+                                            <button type="button" class="btn btn-primary btn-block">DÈtail</button>
                                         </div>
                                     </div>
                                 </div>
@@ -380,7 +635,54 @@
                                     <div class="row">
                                         <div class="col-2"></div>
                                         <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">D√©tail</button>
+                                            <button type="button" class="btn btn-primary btn-block">DÈtail</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-around  mt-4">
+                        <div class="col-3">
+                            <div class="card">
+                                <img class="card-img-top" src="images/card.svg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Nom ressource1</h5>
+                                    <p class="card-text text-center">Description</p>
+                                    <div class="row">
+                                        <div class="col-2"></div>
+                                        <div class="col-8 ">
+                                            <button type="button" class="btn btn-primary btn-block">DÈtail</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card">
+                                <img class="card-img-top" src="images/card.svg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Nom ressource1</h5>
+                                    <p class="card-text text-center">Description</p>
+                                    <div class="row">
+                                        <div class="col-2"></div>
+                                        <div class="col-8 ">
+                                            <button type="button" class="btn btn-primary btn-block">DÈtail</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card">
+                                <img class="card-img-top" src="images/card.svg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Nom ressource1</h5>
+                                    <p class="card-text text-center">Description</p>
+                                    <div class="row">
+                                        <div class="col-2"></div>
+                                        <div class="col-8 ">
+                                            <button type="button" class="btn btn-primary btn-block">DÈtail</button>
                                         </div>
                                     </div>
                                 </div>
@@ -421,13 +723,175 @@
 
     <!--                     /Catalogue                                              -->
 
+    
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   <script>
+   /* nav bar*/
+   $(function () {
+       $(".dropdown").hover(
+           function () {
+               $('.dropdown-menu', this).stop(true, true).fadeIn("fast");
+               $(this).toggleClass('open');
+               $('b', this).toggleClass("caret caret-up");
+           },
+           function () {
+               $('.dropdown-menu', this).stop(true, true).fadeOut("fast");
+               $(this).toggleClass('open');
+               $('b', this).toggleClass("caret caret-up");
+           });
+   });
 
-    <script src="vendors/jquery/jquery.min.js"></script>
-    <script src="vendors/magnific-popup/jquery.magnific-popup.js"></script>
-    <script src="vendors/popper.min.js"></script>
-    <script src="vendors/tooltip.min.js"></script>
-    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="js/java-script.js"></script>
+   /* modal */
+   jQuery(document).ready(function($){
+       var $form_modal = $('.cd-user-modal'),
+           $form_login = $form_modal.find('#cd-login'),
+           $form_signup = $form_modal.find('#cd-signup'),
+           $form_forgot_password = $form_modal.find('#cd-reset-password'),
+           $form_modal_tab = $('.cd-switcher'),
+           $tab_login = $form_modal_tab.children('li').eq(0).children('a'),
+           $tab_signup = $form_modal_tab.children('li').eq(1).children('a'),
+           $forgot_password_link = $form_login.find('.cd-form-bottom-message a'),
+           $back_to_login_link = $form_forgot_password.find('.cd-form-bottom-message a'),
+           $connect_item = $('.connect-item');
+
+       //open modal
+       $connect_item.on('click', function(event){
+
+
+               //show modal layer
+               $form_modal.addClass('is-visible'); 
+               //show the selected form
+               ( $(event.target).is('.cd-sigin') ) ? signup_selected() : login_selected();
+           
+
+       });
+
+       //close modal
+       $('.cd-user-modal').on('click', function(event){
+           if( $(event.target).is($form_modal) || $(event.target).is('.cd-close-form') ) {
+               $form_modal.removeClass('is-visible');
+           }   
+       });
+       //close modal when clicking the esc keyboard button
+       $(document).keyup(function(event){
+           if(event.which=='27'){
+               $form_modal.removeClass('is-visible');
+           }
+       });
+
+       //switch from a tab to another
+       $form_modal_tab.on('click', function(event) {
+           event.preventDefault();
+           ( $(event.target).is( $tab_login ) ) ? login_selected() : signup_selected();
+       });
+
+       //hide or show password
+       $('.hide-password').on('click', function(){
+           var $this= $(this),
+               $password_field = $this.prev('input');
+           
+           ( 'password' == $password_field.attr('type') ) ? $password_field.attr('type', 'text') : $password_field.attr('type', 'password');
+           ( 'Hide' == $this.text() ) ? $this.text('Show') : $this.text('Hide');
+           //focus and move cursor to the end of input field
+           $password_field.putCursorAtEnd();
+       });
+
+       //show forgot-password form 
+       $forgot_password_link.on('click', function(event){
+           event.preventDefault();
+           forgot_password_selected();
+       });
+
+       //back to login from the forgot-password form
+       $back_to_login_link.on('click', function(event){
+           event.preventDefault();
+           login_selected();
+       });
+
+       function login_selected(){
+           $form_login.addClass('is-selected');
+           $form_signup.removeClass('is-selected');
+           $form_forgot_password.removeClass('is-selected');
+           $tab_login.addClass('selected');
+           $tab_signup.removeClass('selected');
+       }
+
+       function signup_selected(){
+           $form_login.removeClass('is-selected');
+           $form_signup.addClass('is-selected');
+           $form_forgot_password.removeClass('is-selected');
+           $tab_login.removeClass('selected');
+           $tab_signup.addClass('selected');
+       }
+
+       function forgot_password_selected(){
+           $form_login.removeClass('is-selected');
+           $form_signup.removeClass('is-selected');
+           $form_forgot_password.addClass('is-selected');
+       }
+
+       //REMOVE THIS - it's just to show error messages 
+       $form_login.find('input[type="submit"]').on('click', function(event){
+           event.preventDefault();
+           $form_login.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
+       });
+       $form_signup.find('input[type="submit"]').on('click', function(event){
+           event.preventDefault();
+           $form_signup.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
+       });
+
+
+       //IE9 placeholder fallback
+       //credits http://www.hagenburger.net/BLOG/HTML5-Input-Placeholder-Fix-With-jQuery.html
+       /*if(!Modernizr.input.placeholder){
+           $('[placeholder]').focus(function() {
+               var input = $(this);
+               if (input.val() == input.attr('placeholder')) {
+                   input.val('');
+               }
+           }).blur(function() {
+               var input = $(this);
+               if (input.val() == '' || input.val() == input.attr('placeholder')) {
+                   input.val(input.attr('placeholder'));
+               }
+           }).blur();
+           $('[placeholder]').parents('form').submit(function() {
+               $(this).find('[placeholder]').each(function() {
+                   var input = $(this);
+                   if (input.val() == input.attr('placeholder')) {
+                       input.val('');
+                   }
+               })
+           });
+       }*/
+
+   });
+
+
+   //credits https://css-tricks.com/snippets/jquery/move-cursor-to-end-of-textarea-or-input/
+   jQuery.fn.putCursorAtEnd = function() {
+       return this.each(function() {
+           // If this function exists...
+           if (this.setSelectionRange) {
+               // ... then use it (Doesn't work in IE)
+               // Double the length because Opera is inconsistent about whether a carriage return is one character or two. Sigh.
+               var len = $(this).val().length * 2;
+               this.setSelectionRange(len, len);
+           } else {
+               // ... otherwise replace the contents with itself
+               // (Doesn't work in Google Chrome)
+               $(this).val($(this).val());
+           }
+       });
+   };
+
+   jQuery('#cody-info ul li').eq(1).on('click', function(){
+   $('#cody-info').hide();
+   });
+   console.log("sss");
+   </script>
 
 </body>
 

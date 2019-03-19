@@ -25,16 +25,11 @@
                         <a class="nav-link" href="#">A propos</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
+ 				<form class="form-inline my-2 my-lg-0">
                     <input class="form-control nav-searchbar" type="search" placeholder="Search" aria-label="Search">
                     <i class="fas fa-search search-icon mr-3"></i>
                 </form>
-                <nav class="main-nav">
-                    <ul>
-                        <li><a href="#0" class="cd-signin btn my-btn-outline">CONNECTER</a></li>
-                    </ul>
-                </nav>
-                
+                <a href="#0" class="cd-signin btn my-btn-outline connect-item ">CONNECTER</a>
             </div>
         </div>
 

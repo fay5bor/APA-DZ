@@ -9,4 +9,21 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+<!--   
+  <servlet>
+	<servlet-name>FicheConnaissance</servlet-name>
+	<servlet-class>com.sdzee.servlets.FicheConnaissance</servlet-class>
+	
+	<init-param>
+		<param-name>auteur</param-name> 
+		<param-value>BOUGUESRI</param-value> 
+	</init-param>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>FicheConnaissance</servlet-name>
+	<url-pattern>/FicheConnaissance</url-pattern>
+</servlet-mapping>
+ -->
+
 </web-app>

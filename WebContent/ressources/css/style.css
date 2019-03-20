@@ -1,0 +1,50 @@
+/* This is to manage the search bar properly*/
+
+.form-control {
+	font-family: 'Lato', sans-serif;
+    padding-left: 2.375rem;
+    border: 1px solid #84B750;
+    border-radius : 0;
+    color: #3D6D0D;
+}
+
+.form-control:focus {
+	font-family: 'Lato', sans-serif;  
+	color: #3D6D0D;
+	background-color: #fff;
+	border-color: #84B750;
+	outline: 0;
+	box-shadow: 0 0 0 0.2rem rgba(209, 237, 179, 0.25);
+}
+
+.has-search .form-control-feedback {
+	font-family: 'Lato', sans-serif;
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #3D6D0D;
+}
+
+.form-control::placeholder {
+	font-family: 'Lato', sans-serif;
+	color: #3D6D0D;
+	opacity: 1;
+}
+
+.tag {
+	font-family: 'Lato', sans-serif;
+	color: #c9c9c9;
+}
+
+.p .span {
+	font-family: 'Lato', sans-serif;
+}
+
+.h1 .h2 .h3 .h4 {
+	font-family: 'Roboto', sans-serif;
+}

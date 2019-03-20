@@ -26,15 +26,16 @@ public class Catalogue extends HttpServlet {
 		int page = Integer.parseInt(Optional.ofNullable(request.getParameter("page")).orElse("1"));
 		int perPage = 9;
 		
-		ArrayList<byte[]> images= new ArrayList<byte[]>();
 		
         ConnectionBdRessource ressourceConnection = new ConnectionBdRessource();
         
-        ArrayList<ArrayList> infos = ressourceConnection.getPageRessourcesInfos(1, perPage, page);
-        
-        request.setAttribute( "ressources", infos );
+        ArrayList<ArrayList> ressources = ressourceConnection.getPageRessources(1, perPage, page);
+        int pages = (int)(Math.ceil((double)ressourceConnection.countRessources(1)/perPage)) ;
+        request.setAttribute( "ressources", ressources );
+        request.setAttribute( "pages", pages );
+        request.setAttribute( "current", page );
 
-		RequestDispatcher view=request.getRequestDispatcher("WEB-INF/views/test_jdbc.jsp");
+		RequestDispatcher view=request.getRequestDispatcher("WEB-INF/views/catalogue.jsp");
 		view.forward(request, response);
 	}
 

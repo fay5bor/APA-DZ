@@ -26,7 +26,7 @@ public class TestBDD extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         /* Initialisation de l'objet Java et récupération des messages */
-		String fileSource = "/home/youneszadi/Bureau/Projet 2cs/images/card.svg";
+		String fileSource = "/home/youneszadi/Bureau/Projet 2cs/images/card.png";
 		byte [] byteImage = Utils.ImageToByte(new File(fileSource));
 
 

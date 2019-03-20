@@ -1,3 +1,12 @@
+
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"
+	import="java.util.ArrayList"
+	%>
+	
+<!DOCTYPE html>
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -490,6 +499,10 @@ xsigin/signup popup
 
 
 <body>
+	<% ArrayList<ArrayList> ressources =(ArrayList<ArrayList>) request.getAttribute("ressources");
+	   int pages = (int) request.getAttribute("pages");
+	   int current = (int) request.getAttribute("current");
+	%>
 	<jsp:include page="parts/nav-bar2.jsp"></jsp:include>	
     <!--                     Catalogue                                              -->
     <div class="m-4">
@@ -511,7 +524,7 @@ xsigin/signup popup
         <div class="">
             <div class="row">
                 <div class="col-2">
-                    <h4>Région</h4>
+                    <h4>RÃ©gion</h4>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="Nord">
                         <label class="custom-control-label" for="Nord">Nord</label><br>
@@ -529,7 +542,7 @@ xsigin/signup popup
                         <label class="custom-control-label" for="Est">Nord</label>
                     </div>
                     <br>
-                    <h4>Catégorie</h4>
+                    <h4>CatÃ©gorie</h4>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="Forestiere">
                         <label class="custom-control-label" for="Nord">Forestiere</label><br>
@@ -548,172 +561,87 @@ xsigin/signup popup
                     </div>
                 </div>
                 <div class="col-10">
-                    <div class="row d-flex justify-content-around  mt-4">
+                	<%for(int i=0 ; i< ressources.size(); ) {
+                			if(i%3 == 0){
+                	%>              
+                    		<div class="row d-flex justify-content-around  mt-4">
+                    <%		} %>
                         <div class="col-3">
                             <div class="card">
-                                <img class="card-img-top" src="images/card.svg" alt="Card image cap">
+                                <img class="card-img-top" height="220px" width="260px" src="data:image/png;base64,<%= ressources.get(i).get(3) %>" alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title text-center">Nom ressource1</h5>
-                                    <p class="card-text text-center">Description</p>
+                                    <h5 class="card-title text-center"><%= ressources.get(i).get(0) %></h5>
+                                    <p class="card-text text-center"><%= ressources.get(i).get(2) %></p>
                                     <div class="row">
                                         <div class="col-2"></div>
                                         <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">Détail</button>
+                                            <button type="button" class="btn btn-primary btn-block">DÃ©tail</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-3">
-                            <div class="card">
-                                <img class="card-img-top" src="images/card.svg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Nom ressource1</h5>
-                                    <p class="card-text text-center">Description</p>
-                                    <div class="row">
-                                        <div class="col-2"></div>
-                                        <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">Détail</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="card">
-                                <img class="card-img-top" src="images/card.svg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Nom ressource1</h5>
-                                    <p class="card-text text-center">Description</p>
-                                    <div class="row">
-                                        <div class="col-2"></div>
-                                        <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">Détail</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row d-flex justify-content-around  mt-4">
-                        <div class="col-3">
-                            <div class="card">
-                                <img class="card-img-top" src="images/card.svg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Nom ressource1</h5>
-                                    <p class="card-text text-center">Description</p>
-                                    <div class="row">
-                                        <div class="col-2"></div>
-                                        <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">Détail</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="card">
-                                <img class="card-img-top" src="images/card.svg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Nom ressource1</h5>
-                                    <p class="card-text text-center">Description</p>
-                                    <div class="row">
-                                        <div class="col-2"></div>
-                                        <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">Détail</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="card">
-                                <img class="card-img-top" src="images/card.svg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Nom ressource1</h5>
-                                    <p class="card-text text-center">Description</p>
-                                    <div class="row">
-                                        <div class="col-2"></div>
-                                        <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">Détail</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row d-flex justify-content-around  mt-4">
-                        <div class="col-3">
-                            <div class="card">
-                                <img class="card-img-top" src="images/card.svg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Nom ressource1</h5>
-                                    <p class="card-text text-center">Description</p>
-                                    <div class="row">
-                                        <div class="col-2"></div>
-                                        <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">Détail</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="card">
-                                <img class="card-img-top" src="images/card.svg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Nom ressource1</h5>
-                                    <p class="card-text text-center">Description</p>
-                                    <div class="row">
-                                        <div class="col-2"></div>
-                                        <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">Détail</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="card">
-                                <img class="card-img-top" src="images/card.svg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Nom ressource1</h5>
-                                    <p class="card-text text-center">Description</p>
-                                    <div class="row">
-                                        <div class="col-2"></div>
-                                        <div class="col-8 ">
-                                            <button type="button" class="btn btn-primary btn-block">Détail</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <nav class="mt-5 d-flex align-items-center flex-column" aria-label="Page navigation example">
+                        <% i++; 	
+                           if(i%3 == 0 || i== ressources.size()){ %>
+                        		</div>
+                        <%  }       
+                        }
+                		if (pages > 0) {
+                		%>
+                        <nav class="mt-5 d-flex align-items-center flex-column" aria-label="Page navigation example">
                         <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">2<span
-                                        class="sr-only">(current)</a></li>
-                            <li class="page-item"><a class="page-link" href="/catalogue?page=2">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item"><a class="page-link" href="#">6</a></li>
-                            <li class="page-item"><a class="page-link" href="#">7</a></li>
-                            <li class="page-item"><a class="page-link" href="#">...</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
+                            <% if (current == 1) { %>                       
+	                            <li class="page-item disabled">
+	                                <a class="page-link" href="#" aria-label="First">
+	                                    <span aria-hidden="true">First</span>
+	                                    <span class="sr-only">First</span>
+	                                </a>
+	                            </li>
+	                        <% } else { %>	   
+	                        	<li class="page-item">
+	                                <a class="page-link" href="/APA-DZ/Catalogue" aria-label="First">
+	                                    <span aria-hidden="true">First</span>
+	                                	<span class="sr-only">First</span>
+	                                </a>
+	                            </li>     
+	                        <% } %>	    
+	                        <% int i = ( current > 5 ? current- 4 : 1) ; %>
+	                        <% if (i != 1) { %>	
+                     	        <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                     	    <% } %>   
+                     	    <% for (; i <= (current + 4) && i <= pages; i++) { %>
+                     	    	<% if (i == current) { %>    
+	                              <li class="page-item active"><a class="page-link"><%= i %><span
+	                                        class="sr-only">(current)</a></li>   
+	                            <% } else { %>
+                            		<li class="page-item"><a class="page-link" href="/APA-DZ/Catalogue?page=<%= i %>"><%= i %></a></li>	                            
+                        		<% } %>            
+                        	    <% if (i == current + 4 && i < pages) { %>
+                            		<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                        		<% } %>	    	                 	 
+                        	<% } %>
+                    		<% if (current == pages) { %>
+                        		<li class="page-item disabled">
+                                	<a class="page-link" href="#" aria-label="Last">
+                                    	<span aria-hidden="true">Last</span>
+                                    	<span class="sr-only">Last</span>
+                                	</a>
+                            	</li>
+                    		<% } else { %>
+                        		<li class="page-item">
+                                	<a class="page-link" href="/APA-DZ/Catalogue?page=<%= pages %>" aria-label="Last">
+                                    	<span aria-hidden="true">Last</span>
+                                    	<span class="sr-only">Last</span>
+                                	</a>
+                            	</li>
+                    		<% } %>                     	    	                        	                      	                                                    
+                           
                         </ul>
-                    </nav>
+                        <%} %>
+                    </nav>                  
+                    </div>
+
+                    
                 </div>
             </div>
 

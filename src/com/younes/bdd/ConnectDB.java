@@ -6,9 +6,9 @@ import java.sql.DriverManager;
 public class ConnectDB {
 
  Connection mySqlConnection;
- String URL = "jdbc:postgresql://localhost:5432/RG";
- String pwd = "postgres";
- String user = "postgres";
+ String URL = "jdbc:postgresql://ec2-54-247-85-251.eu-west-1.compute.amazonaws.com:5432/d5mqedu30ls8qn?sslmode=require";
+ String pwd = "dd69585b38c89daaeee5b7f98b62d2e5a3cdfd26e14c1cf942eccc5fa1ebfb44";
+ String user = "wjivgakefftdwq";
 
  public Connection getConnection() {
 

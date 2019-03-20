@@ -2,15 +2,31 @@ package com.younes.bdd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 public class ConnectDB {
 
  Connection mySqlConnection;
- String URL = "jdbc:postgresql://ec2-54-247-85-251.eu-west-1.compute.amazonaws.com:5432/d5mqedu30ls8qn?sslmode=require";
- String pwd = "dd69585b38c89daaeee5b7f98b62d2e5a3cdfd26e14c1cf942eccc5fa1ebfb44";
- String user = "wjivgakefftdwq";
 
- public Connection getConnection() {
+
+ public Connection getConnection() throws Exception{
+     String energy = System.getenv().get("PRODUCTION");
+     final String URL;
+     final String pwd;
+     final String user;
+
+     if(energy==null) {
+    	 Context ctx = new InitialContext();
+    	 Context env = (Context) ctx.lookup("java:comp/env");
+    	 URL = (String) env.lookup("devurl");
+    	 pwd = (String) env.lookup("devpwd");
+    	 user = (String) env.lookup("devuser");
+     }else {
+    	 URL = System.getenv().get("PROD_URL");
+    	 pwd = System.getenv().get("PROD_PWD");
+    	 user = System.getenv().get("PROD_USER");
+     }
 
   try {
    Class.forName("org.postgresql.Driver");

@@ -599,7 +599,7 @@ xsigin/signup popup
 	                            </li>
 	                        <% } else { %>	   
 	                        	<li class="page-item">
-	                                <a class="page-link" href="Catalogue" aria-label="First">
+	                                <a class="page-link" href="${pageContext.request.contextPath}/Catalogue" aria-label="First">
 	                                    <span aria-hidden="true">First</span>
 	                                	<span class="sr-only">First</span>
 	                                </a>
@@ -614,7 +614,7 @@ xsigin/signup popup
 	                              <li class="page-item active"><a class="page-link"><%= i %><span
 	                                        class="sr-only">(current)</a></li>   
 	                            <% } else { %>
-                            		<li class="page-item"><a class="page-link" href="Catalogue?page=<%= i %>"><%= i %></a></li>	                            
+                            		<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Catalogue?page=<%= i %>"><%= i %></a></li>	                            
                         		<% } %>            
                         	    <% if (i == current + 4 && i < pages) { %>
                             		<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
@@ -629,7 +629,7 @@ xsigin/signup popup
                             	</li>
                     		<% } else { %>
                         		<li class="page-item">
-                                	<a class="page-link" href="Catalogue?page=<%= pages %>" aria-label="Last">
+                                	<a class="page-link" href="${pageContext.request.contextPath}/Catalogue?page=<%= pages %>" aria-label="Last">
                                     	<span aria-hidden="true">Last</span>
                                     	<span class="sr-only">Last</span>
                                 	</a>

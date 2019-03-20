@@ -11,7 +11,7 @@ public class ConnectDB {
 
 
  public Connection getConnection() throws Exception{
-     String energy = System.getenv().get("PRODUCTION");
+     String energy = System.getenv().get("ENV");
      final String URL;
      final String pwd;
      final String user;

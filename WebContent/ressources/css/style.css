@@ -18,7 +18,7 @@
 }
 
 .has-search .form-control-feedback {
-	font-family: 'Lato', sans-serif;
+	/* font-family: 'Lato', sans-serif; */
     position: absolute;
     z-index: 2;
     display: block;
@@ -47,4 +47,8 @@
 
 .h1 .h2 .h3 .h4 {
 	font-family: 'Roboto', sans-serif;
+}
+
+#path {
+	background-color: #2680EB;
 }

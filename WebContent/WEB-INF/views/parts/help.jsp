@@ -1,12 +1,12 @@
- <!--------------              Help                         ---------------->
+    <!--------------              Help                         ---------------->
     <div class="container help">
         <div class="row">
             <div class="col-lg-6 order-lg-1 order-md-2 order-sm-2 d-flex justify-content-center
          mt-lg-0 mt-md-3 mt-sm-3">
-                <img src="images/clipboard.svg" width="250" height="250" alt="">
+                <img src="${pageContext.request.contextPath}/ressources/images/clipboard.svg" width="250" height="250" alt="">
             </div>
             <div
-                class="col-lg-6 order-lg-2 order-md-1 order-sm-1  align-items-center text-lg-left text-md-center text-sm-center">
+                class="col-lg-6 order-lg-2 order-md-1 order-sm-1  align-items-center text-lg-left text-center mt-lg-2 mt-5">
                 <h3>C'EST QUOI APA DZ</h3>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,

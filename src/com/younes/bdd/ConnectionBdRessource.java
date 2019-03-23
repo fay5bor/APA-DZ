@@ -92,20 +92,60 @@ public class ConnectionBdRessource {
 		}
 	}
 	
-	public ArrayList<ArrayList> getPageRessources(int ressource_table, int perPage, int page){
+	public ArrayList<ArrayList> getPageRessources(int perPage, int page, String search, ArrayList<String> categoriesList){
 		int skip = (perPage*page) - perPage;
 		ArrayList<ArrayList> output = new ArrayList<ArrayList>();
 		ConnectDB connect = new ConnectDB();
 		Connection connection = null;
 	    ResultSet resultat = null;
+	    int categoriesListSize= categoriesList.size();
 
 		try {
 			connection = connect.getConnection();
+			String query= "";
+			int numFiltre=0;
+			if (categoriesList.contains("Forestiere") || categoriesListSize==0) {
+				query+="(SELECT nom, contenu, type, image, update_date from ressource_1) \n";
+				numFiltre++;
+			}
+			
+			if (categoriesList.contains("Microorganismes") || categoriesListSize==0) {
+				if (numFiltre>0)
+					query+="UNION ";
+				query+="(SELECT nom, contenu, type, image, update_date from ressource_2) \n";
+				numFiltre++;
+			}
 
-			Statement statement = connection.createStatement();
-			String query= "SELECT nom, contenu, type, image from ressource_"+ressource_table+" order by id_chercheur2"
-					+ " OFFSET "+ skip +" ROWS FETCH NEXT "+ perPage  +" ROWS ONLY";
-			resultat = statement.executeQuery(query);
+			if (categoriesList.contains("Agriculture") || categoriesListSize==0) {
+				if (numFiltre>0)
+					query+="UNION ";
+				query+="(SELECT nom, contenu, type, image, update_date from ressource_3) \n";
+				numFiltre++;
+			}
+
+			if (categoriesList.contains("Marine") || categoriesListSize==0) {
+				if (numFiltre>0)
+					query+="UNION ";
+				query+="(SELECT nom, contenu, type, image, update_date from ressource_4) \n";
+				numFiltre++;
+			}
+			
+			if (categoriesList.contains("Alimentaire") || categoriesListSize==0) {
+				if (numFiltre>0)
+					query+="UNION ";
+				query+="(SELECT nom, contenu, type, image, update_date from ressource_5)  \n";
+			}
+			
+			if (search!= null &&  !search.isEmpty()) {
+				query = "SELECT * FROM ( "+ query + " ) as ressource_table  \n"+
+						"WHERE to_tsvector('French', nom ) @@ to_tsquery('"+search+"') \n";
+			}
+			query += "order by update_date desc OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setInt(1, skip);
+			ps.setInt(2, perPage);			
+			resultat = ps.executeQuery();
+
 	        while ( resultat.next() ) {
 	            ArrayList<String> row = new ArrayList<String>();
 	            row.add(resultat.getString("nom"));
@@ -116,6 +156,7 @@ public class ConnectionBdRessource {
 	            row.add(base64Encoded);
 	            output.add(row);	            
 	        }
+			ps.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -129,16 +170,53 @@ public class ConnectionBdRessource {
 		}
 		return output;
 	}
-	public int countRessources(int ressource_table) {
+	public int countRessources(String search, ArrayList<String> categoriesList ) {
 		ConnectDB connect = new ConnectDB();
 		Connection connection = null;
 	    ResultSet resultat = null;
 	    int output=0;
+	    int categoriesListSize= categoriesList.size();
+
 		try {
 			connection = connect.getConnection();
-
 			Statement statement = connection.createStatement();
-			String query= "SELECT count(*) count from ressource_"+ressource_table+" ;";
+			String query= "SELECT count(*) count from( \n";
+			int numFiltre=0;
+			if (categoriesList.contains("Forestiere") || categoriesListSize==0) {
+				query+="(SELECT nom, contenu, type, image, update_date from ressource_1) \n";
+				numFiltre++;
+			}
+			
+			if (categoriesList.contains("Microorganismes") || categoriesListSize==0) {
+				if (numFiltre>0)
+					query+="UNION ";
+				query+="(SELECT nom, contenu, type, image, update_date from ressource_2) \n";
+				numFiltre++;
+			}
+
+			if (categoriesList.contains("Agriculture") || categoriesListSize==0) {
+				if (numFiltre>0)
+					query+="UNION ";
+				query+="(SELECT nom, contenu, type, image, update_date from ressource_3) \n";
+				numFiltre++;
+			}
+
+			if (categoriesList.contains("Marine") || categoriesListSize==0) {
+				if (numFiltre>0)
+					query+="UNION ";
+				query+="(SELECT nom, contenu, type, image, update_date from ressource_4) \n";
+				numFiltre++;
+			}
+			
+			if (categoriesList.contains("Alimentaire") || categoriesListSize==0) {
+				if (numFiltre>0)
+					query+="UNION ";
+				query+="(SELECT nom, contenu, type, image, update_date from ressource_5)  \n";
+			}
+			query+=") as ressource_table \n";
+			if (search!= null && !search.isEmpty()) {
+				query += "WHERE to_tsvector('French', nom ) @@ to_tsquery('"+search+"') \n";
+			}
 			resultat = statement.executeQuery(query);
 			resultat.next();
 			output= resultat.getInt("count");

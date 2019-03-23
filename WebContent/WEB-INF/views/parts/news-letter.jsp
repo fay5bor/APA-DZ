@@ -2,7 +2,7 @@
     <!--------------              Newsletter                         ---------------->
     <div class="container newsletter mb-5">
         <div class="row">
-            <div class="col-lg-7 col-md-12 text-lg-left text-md-center text-sm-center">
+            <div class="col-lg-7 col-md-12 text-lg-left text-center">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2 offset-md-0">
                         <h3>REJOIGNEZ NOTRE</h3>

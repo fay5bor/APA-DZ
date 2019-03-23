@@ -9,7 +9,7 @@
                             <div class="slide-box">
 
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement1</h5>
                                         <p class="card-text text-center"><i
@@ -17,7 +17,7 @@
                                     </div>
                                 </div>
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement2</h5>
                                         <p class="card-text text-center"><i
@@ -25,7 +25,7 @@
                                     </div>
                                 </div>
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement3</h5>
                                         <p class="card-text text-center"><i
@@ -33,7 +33,7 @@
                                     </div>
                                 </div>
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement4</h5>
                                         <p class="card-text text-center"><i
@@ -48,7 +48,7 @@
                             <div class="slide-box">
 
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement1</h5>
                                         <p class="card-text text-center"><i
@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement2</h5>
                                         <p class="card-text text-center"><i
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement3</h5>
                                         <p class="card-text text-center"><i
@@ -76,7 +76,7 @@
                         <div class="d-none d-sm-block d-md-none">
                             <div class="slide-box">
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement1</h5>
                                         <p class="card-text text-center"><i
@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement2</h5>
                                         <p class="card-text text-center"><i
@@ -95,7 +95,7 @@
                         </div>
                         <div class="d-block d-sm-none">
                             <div class="card">
-                                <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title text-center">Emplacement1</h5>
                                     <p class="card-text text-center"><i class="fas fa-map-marker-alt place-icon"></i>
@@ -108,7 +108,7 @@
                         <div class="d-none d-lg-block">
                             <div class="slide-box">
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement5</h5>
                                         <p class="card-text text-center"><i
@@ -116,7 +116,7 @@
                                     </div>
                                 </div>
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement6</h5>
                                         <p class="card-text text-center"><i
@@ -124,7 +124,7 @@
                                     </div>
                                 </div>
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement7</h5>
                                         <p class="card-text text-center"><i
@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement8</h5>
                                         <p class="card-text text-center"><i
@@ -146,7 +146,7 @@
                         <div class="d-none d-md-block d-lg-none">
                             <div class="slide-box">
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement4</h5>
                                         <p class="card-text text-center"><i
@@ -154,7 +154,7 @@
                                     </div>
                                 </div>
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement5</h5>
                                         <p class="card-text text-center"><i
@@ -162,7 +162,7 @@
                                     </div>
                                 </div>
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement6</h5>
                                         <p class="card-text text-center"><i
@@ -174,7 +174,7 @@
                         <div class="d-none d-sm-block d-md-none">
                             <div class="slide-box">
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement3</h5>
                                         <p class="card-text text-center"><i
@@ -182,7 +182,7 @@
                                     </div>
                                 </div>
                                 <div class="card mr-3 ml-3">
-                                    <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                    <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Emplacement4</h5>
                                         <p class="card-text text-center"><i
@@ -193,7 +193,7 @@
                         </div>
                         <div class="d-block d-sm-none">
                             <div class="card">
-                                <img class="card-img-top" src="images/card.svg" height="260px" alt="Card image cap">
+                                <img class="card-img-top" src="${pageContext.request.contextPath}/ressources/images/card.svg" height="260px" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title text-center">Emplacement2</h5>
                                     <p class="card-text text-center"><i class="fas fa-map-marker-alt place-icon"></i>

@@ -11,12 +11,12 @@ public class ConnectDB {
 
 
  public Connection getConnection() throws Exception{
-     String energy = System.getenv().get("ENV");
+     String environement = System.getenv().get("ENV");
      final String URL;
      final String pwd;
      final String user;
 
-     if(energy==null) {
+     if(environement==null) {
     	 Context ctx = new InitialContext();
     	 Context env = (Context) ctx.lookup("java:comp/env");
     	 URL = (String) env.lookup("devurl");

@@ -320,9 +320,7 @@ xsigin/signup popup
 .place-icon{
     color: rgb(163, 163, 163);
 }
-.send-btn{
-    margin-left: -45px;
-}
+
 .copyright {
   background-color: rgba(0, 0, 0, 0.3);
 }
@@ -373,6 +371,9 @@ xsigin/signup popup
     .newsletter{
         padding-top: 100px
     }
+    .send-btn{
+    	margin-left: -52px;
+	}
     .carousel {
         width: 45%;
     }
@@ -390,6 +391,9 @@ xsigin/signup popup
     .newsletter{
         padding-top: 100px
     }
+    .send-btn{
+    	margin-left: -45px;
+	}
     /*modal*/
     .cd-user-modal-container {
         margin: 4em auto;
@@ -432,6 +436,9 @@ xsigin/signup popup
     .newsletter{
         padding-top: 150px
     }
+    .send-btn{
+    	margin-left: -45px;
+	}
     .social-media-icons{
         padding-top: 150px;
     }

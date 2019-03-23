@@ -1,7 +1,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light pl-5 pr-5">
-        <a class="navbar-brand" href="#">
-            <img src="images/applogo.png" width="60" height="60" alt="">
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/Home">
+            <img src="${pageContext.request.contextPath}/ressources/images/applogo.png" width="60" height="60" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
             aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,7 @@
             <ul class="navbar-nav mr-auto ml-md-5 ml-sm-0">
 
                 <li class="nav-item mr-5">
-                    <a class="nav-link" href="#">Ressources</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/Catalogue">Ressources</a>
                 </li>
                 <li class="nav-item mr-5">
                     <a class="nav-link" href="#">Instituts</a>

@@ -46,11 +46,10 @@ public class ConnectionBdRessource {
 			connection = connect.getConnection();
 			
 			PreparedStatement ps = connection.prepareStatement(
-					"INSERT INTO ressource_" + ressource_table + " (nom, contenu, type, image) VALUES (?, ?, ?, ?)");
+					"INSERT INTO ressource_" + ressource_table + " (nom, contenu, type) VALUES (?, ?, ?)");
 			ps.setString(1, nom);
 			ps.setString(2, contenu);
 			ps.setString(3, type);
-			ps.setBytes(4, img);
 
 			ps.executeUpdate();
 			ps.close();

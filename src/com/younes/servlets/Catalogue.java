@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.younes.bdd.ConnectionBdRessource;
+import com.younes.bdd.RessourceManager;
 
 /**
  * Servlet implementation class Catalogue
@@ -39,10 +40,9 @@ public class Catalogue extends HttpServlet {
 		}
 		int perPage = 9;
 		
-        ConnectionBdRessource ressourceConnection = new ConnectionBdRessource();
         
-        ArrayList<ArrayList> ressources = ressourceConnection.getPageRessources(perPage, page, search, categoriesList);
-        int pages = (int)(Math.ceil((double)ressourceConnection.countRessources(search, categoriesList)/perPage)) ;
+        ArrayList<ArrayList> ressources = RessourceManager.getPageRessources(perPage, page, search, categoriesList);
+        int pages = (int)(Math.ceil((double)RessourceManager.countRessources(search, categoriesList)/perPage)) ;
         request.setAttribute( "ressources", ressources );
         request.setAttribute( "pages", pages );
         request.setAttribute( "current", page );

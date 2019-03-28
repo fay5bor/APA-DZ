@@ -52,10 +52,10 @@
 	   int current = (int) request.getAttribute("current");
 	   String search = (String) request.getAttribute("search");
 	   ArrayList<String> categorie = (ArrayList<String>) request.getAttribute("categorie");
-   		String catFiltre = ""  ;
-   		for(String cat: categorie){
+   	   String catFiltre = ""  ;
+   	   for(String cat: categorie){
    			catFiltre+="categorie="+cat+"&";
-   		}
+   	   }
 	%>
 	<jsp:include page="parts/nav-bar2.jsp"></jsp:include>	
 	
@@ -116,10 +116,10 @@
                     <%		} %>
                         <div class="col-3">
                             <div class="card">
-                                <img class="card-img-top" height="220px" width="260px" src="data:image/png;base64,<%= ressources.get(i).get(3) %>" alt="Card image cap">
+                                <img class="card-img-top" height="220px" width="260px" src="data:image/png;base64,<%= ressources.get(i).get(2) %>" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title text-center"><%= ressources.get(i).get(0) %></h5>
-                                    <p class="card-text text-center"><%= ressources.get(i).get(2) %></p>
+                                    <p class="card-text text-center"><%= ressources.get(i).get(1) %></p>
                                     <div class="row">
                                         <div class="col-2"></div>
                                         <div class="col-8 ">

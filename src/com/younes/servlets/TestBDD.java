@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.younes.bdd.ConnectionBdRessource;
+import com.younes.bdd.RessourceManager;
 import com.younes.utils.Utils;
 
 /**
@@ -26,38 +27,36 @@ public class TestBDD extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         /* Initialisation de l'objet Java et récupération des messages */
-		String fileSource = "/home/youneszadi/Bureau/Projet 2cs/images/card.png";
-		byte [] byteImage = Utils.ImageToByte(new File(fileSource));
-
-
+		String fileSource = "/home/youneszadi/Bureau/Projet 2cs/images/plante.jpeg";
+		byte [] byteImage = Utils.ImageToByte(new File(fileSource));				
 		
-        ConnectionBdRessource test = new ConnectionBdRessource();
-        test.deleteAllRessources();
+		RessourceManager.deleteAllRessources();
         /* Exécution d'une requête de lecture */
         for (int i=0; i<100; i++) {
         	String nom= "nom_"+i;
     		String contenu ="contenu_"+i;
-    		String type = "type_"+i;
+    		String type = "";
         	if (i<20) {	   
-	        	test.addRessource(1, nom, contenu, type, byteImage);
+        		type = "Forestiere";
+	        	RessourceManager.addRessourceGen(nom, contenu, type, byteImage);
 	        	
         	}else if (i< 40) {	        	
-	        	test.addRessource(2, nom, contenu, type, byteImage);	
-	        	
+        		type = "Microorganismes";
+	        	RessourceManager.addRessourceGen(nom, contenu, type, null);	        	
         	}else if (i<60) {
-	        	test.addRessource(3, nom, contenu, type, byteImage);
-
+        		type = "Agriculture";
+	        	RessourceManager.addRessourceGen(nom, contenu, type, null);
         	}else if (i<80) {
-	        	test.addRessource(4, nom, contenu, type, byteImage);
-        	}
-        	else {	        		
-	        	test.addRessource(5, nom, contenu, type, byteImage);
-        	}
+        		type = "Marine";
+	        	RessourceManager.addRessourceGen(nom, contenu, type, byteImage);        	
+	        }else {	        		
+        		type = "Alimentaire";
+	        	RessourceManager.addRessourceGen(nom, contenu, type, null);        	}
 
         }
         /* Enregistrement de la liste des messages dans l'objet requête */
         request.setAttribute( ATT_MESSAGES, "succes" );
-
+        
         /* Transmission vers la page en charge de l'affichage des résultats */
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );	
 	}

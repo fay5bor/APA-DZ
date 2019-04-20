@@ -44,12 +44,19 @@ public class Catalogue extends HttpServlet {
         
         ArrayList<ArrayList<String>> ressources = RessourceManager.getPageRessources(perPage, page, search, categoriesList, regionsList);
         int pages = (int)(Math.ceil((double)RessourceManager.countRessources(search, categoriesList)/perPage)) ;
+        String catFiltre = ""  ;
+       	for(String cat: categoriesList){
+       		catFiltre+="categorie="+cat+"&";
+       	}
+       	String regionFiltre = ""  ;
+       	for(String reg: regionsList){
+       		regionFiltre+="region="+reg+"&";
+       	}
+        
         request.setAttribute( "ressources", ressources );
         request.setAttribute( "pages", pages );
-        request.setAttribute( "current", page );
-        request.setAttribute( "search", search );
-        request.setAttribute( "categorie", categoriesList );
-        request.setAttribute( "region", regionsList );
+        request.setAttribute( "catFiltre", catFiltre );
+        request.setAttribute( "regionFiltre", regionFiltre );
 
 		RequestDispatcher view=request.getRequestDispatcher("WEB-INF/views/catalogue.jsp");
 		view.forward(request, response);

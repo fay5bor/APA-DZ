@@ -1,4 +1,6 @@
 <%@page import="org.eclipse.jdt.core.compiler.CategorizedProblem"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"
 	import="java.util.ArrayList"
@@ -94,21 +96,20 @@
 </head>
 
 <body>
-	<% ArrayList<ArrayList> ressources =(ArrayList<ArrayList>) request.getAttribute("ressources");
-	   int pages = (int) request.getAttribute("pages");
-	   int current = (int) request.getAttribute("current");
-	   String search = (String) request.getAttribute("search");
-	   ArrayList<String> categorie = (ArrayList<String>) request.getAttribute("categorie");
-   	   String catFiltre = ""  ;
-   	   for(String cat: categorie){
-   			catFiltre+="categorie="+cat+"&";
-   	   }
-	   ArrayList<String> region = (ArrayList<String>) request.getAttribute("region");
-   	   String regionFiltre = ""  ;
-   	   for(String reg: region){
-   			regionFiltre+="region="+reg+"&";
-   	   }
-	%>
+	<c:set var="search">
+		<c:out value="${param.search}" default="" />
+	</c:set>
+	<c:set var="current" >
+   		<c:out value="${param.page}" default="1"/>
+	</c:set>
+	<c:set var="i">
+		<c:out value="${current > 5 ? current-4 : 1}" />
+	</c:set>
+	<c:set var="min_loop">
+		<c:out value="${current+4 >= pages ? pages : current+4}" />
+	</c:set>
+
+	
 	<jsp:include page="parts/nav-bar2.jsp"></jsp:include>	
 	
 	
@@ -128,39 +129,14 @@
             	<div class="col-lg-12 col-11">
             	<form id="searchForm" method="get" action="${pageContext.request.contextPath}/Catalogue" class="form-inline my-2 pl-3">
                     <i class="fas fa-search search-bar-icon"></i>
-                    <input name="search" class="form-control search-bar-input" type="search" placeholder="Search" aria-label="Search" value="<%= ((search!=null) ? search : "") %>" >
+                    <input name="search" class="form-control search-bar-input" type="search" placeholder="Search" aria-label="Search" value="<c:out value="${search}" default="" />">
                 </form>
             	</div>
             	<div class="d-block d-lg-none d-xl-none col-1 mt-2">
             		<a class="btn mobile-filter-btn my-btn dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<i class="fas fa-filter"></i>
         			</a>
-        			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          				<div class="dropdown-item">
-          					<h5>Action</h5>
-							<div class="custom-control custom-checkbox">
-	                        	<input form="searchForm" name="categorie" value="Forestiere" type="checkbox" class="custom-control-input" id="Forestiere" <%= (categorie.contains("Forestiere")) ? "checked" : ""  %>>
-	                        	<label class="custom-control-label" for="Forestiere">Forestiere</label><br>
-	                   		</div>
-	                    	<div class="custom-control custom-checkbox">
-	                        	<input form="searchForm" name="categorie" value="Microorganismes" type="checkbox" class="custom-control-input" id="Microorganismes" <%= (categorie.contains("Microorganismes")) ? "checked" : ""  %> >
-	                        	<label class="custom-control-label" for="Microorganismes">Microorganismes</label>
-	                    	</div>
-	                    	<div class="custom-control custom-checkbox">
-		                        <input form="searchForm" name="categorie" value="Agriculture" type="checkbox" class="custom-control-input" id="Agriculture" <%= (categorie.contains("Agriculture")) ? "checked" : ""  %>>
-	                        	<label class="custom-control-label" for="Agriculture">Agriculture</label>
-	                    	</div>
-	                    	<div class="custom-control custom-checkbox">
-		                        <input form="searchForm" name="categorie" value="Marine" type="checkbox" class="custom-control-input" id="Marine" <%= (categorie.contains("Marine")) ? "checked" : ""  %>>
-		                        <label class="custom-control-label" for="Marine">Marine</label>
-	                    	</div>
-	                    	<div class="custom-control custom-checkbox">
-	                        	<input form="searchForm" name="categorie" value="Alimentaire" type="checkbox" class="custom-control-input" id="Alimentaire" <%= (categorie.contains("Alimentaire")) ? "checked" : ""  %>>
-	                        	<label class="custom-control-label" for="Alimentaire">Alimentaire</label>
-	                    	</div>
-          				</div>
-          				<br/>
-        			</div>
+        			
                     <!-- <button form="searchForm" type="submit" class="btn mobile-filter-btn my-btn ">
 					 <i class="fas fa-filter"></i>
                      </button> -->                              
@@ -179,57 +155,93 @@
                     
                     <h4>Catégorie</h4>
                     <div class="custom-control custom-checkbox">
-                        <input form="searchForm" name="categorie" value="Forestiere" type="checkbox" class="custom-control-input" id="Forestiere" <%= (categorie.contains("Forestiere")) ? "checked" : ""  %>>
+                        <input form="searchForm" name="categorie" value="Forestiere" type="checkbox" class="custom-control-input" id="Forestiere"
+                           	<c:forEach items="${paramValues.categorie}" var="item">
+								<c:out  value="${fn:contains(item, 'Forestiere')? 'checked' : ''}" />
+							</c:forEach>    
+                        />
                         <label class="custom-control-label" for="Forestiere">Forestiere</label><br>
                     </div>
                     <div class="custom-control custom-checkbox">
-                        <input form="searchForm" name="categorie" value="Microorganismes" type="checkbox" class="custom-control-input" id="Microorganismes" <%= (categorie.contains("Microorganismes")) ? "checked" : ""  %> >
+                        <input form="searchForm" name="categorie" value="Microorganismes" type="checkbox" class="custom-control-input" id="Microorganismes"
+                            <c:forEach items="${paramValues.categorie}" var="item">
+								<c:out  value="${fn:contains(item, 'Microorganismes')? 'checked' : ''}" />
+							</c:forEach>    
+                        />
                         <label class="custom-control-label" for="Microorganismes">Microorganismes</label>
                     </div>
                     <div class="custom-control custom-checkbox">
-                        <input form="searchForm" name="categorie" value="Agriculture" type="checkbox" class="custom-control-input" id="Agriculture" <%= (categorie.contains("Agriculture")) ? "checked" : ""  %>>
+                        <input form="searchForm" name="categorie" value="Agriculture" type="checkbox" class="custom-control-input" id="Agriculture"
+                          	<c:forEach items="${paramValues.categorie}" var="item">
+								<c:out  value="${fn:contains(item, 'Agriculture')? 'checked' : ''}" />
+							</c:forEach>     
+                        />
                         <label class="custom-control-label" for="Agriculture">Agriculture</label>
                     </div>
                     <div class="custom-control custom-checkbox">
-                        <input form="searchForm" name="categorie" value="Marine" type="checkbox" class="custom-control-input" id="Marine" <%= (categorie.contains("Marine")) ? "checked" : ""  %>>
+                        <input form="searchForm" name="categorie" value="Marine" type="checkbox" class="custom-control-input" id="Marine"
+                          	<c:forEach items="${paramValues.categorie}" var="item">
+								<c:out  value="${fn:contains(item, 'Marine')? 'checked' : ''}" />
+							</c:forEach>     
+                        />
                         <label class="custom-control-label" for="Marine">Marine</label>
                     </div>
                     <div class="custom-control custom-checkbox">
-                        <input form="searchForm" name="categorie" value="Alimentaire" type="checkbox" class="custom-control-input" id="Alimentaire" <%= (categorie.contains("Alimentaire")) ? "checked" : ""  %>>
+                        <input form="searchForm" name="categorie" value="Alimentaire" type="checkbox" class="custom-control-input" id="Alimentaire"
+                        	<c:forEach items="${paramValues.categorie}" var="item">
+								<c:out  value="${fn:contains(item, 'Alimentaire')? 'checked' : ''}" />
+							</c:forEach>   
+                        />
                         <label class="custom-control-label" for="Alimentaire">Alimentaire</label>
                     </div> <br/>
                     <h4>Région</h4>
                     <div class="custom-control custom-checkbox">
-                        <input form="searchForm" name="region" value="Nord" type="checkbox" class="custom-control-input" id="Nord" <%= (region.contains("Nord")) ? "checked" : ""  %>>
+                        <input form="searchForm" name="region" value="Nord" type="checkbox" class="custom-control-input" id="Nord"
+             		        <c:forEach items="${paramValues.region}" var="item">
+								<c:out  value="${fn:contains(item, 'Nord')? 'checked' : ''}" />
+							</c:forEach> 
+                          />
                         <label class="custom-control-label" for="Nord">Nord</label><br>
                     </div>
                     <div class="custom-control custom-checkbox">
-                        <input form="searchForm" name="region" value="Sud" type="checkbox" class="custom-control-input" id="Sud" <%= (region.contains("Sud")) ? "checked" : ""  %> >
+                        <input form="searchForm" name="region" value="Sud" type="checkbox" class="custom-control-input" id="Sud"
+                        	<c:forEach items="${paramValues.region}" var="item">
+								<c:out  value="${fn:contains(item, 'Sud')? 'checked' : ''}" />
+							</c:forEach>                         
+                        />
                         <label class="custom-control-label" for="Sud">Sud</label>
                     </div>
                     <div class="custom-control custom-checkbox">
-                        <input form="searchForm" name="region" value="Est" type="checkbox" class="custom-control-input" id="Est" <%= (region.contains("Est")) ? "checked" : ""  %>>
+                        <input form="searchForm" name="region" value="Est" type="checkbox" class="custom-control-input" id="Est"
+                        	<c:forEach items="${paramValues.region}" var="item">
+								<c:out  value="${fn:contains(item, 'Est')? 'checked' : ''}" />
+							</c:forEach>                           
+                        />
                         <label class="custom-control-label" for="Est">Est</label>
                     </div>
                     <div class="custom-control custom-checkbox">
-                        <input form="searchForm" name="region" value="Ouest" type="checkbox" class="custom-control-input" id="Ouest" <%= (region.contains("Ouest")) ? "checked" : ""  %>>
+                        <input form="searchForm" name="region" value="Ouest" type="checkbox" class="custom-control-input" id="Ouest"
+                        	<c:forEach items="${paramValues.region}" var="item">
+								<c:out  value="${fn:contains(item, 'Ouest')? 'checked' : ''}" />
+							</c:forEach>                           
+                        />
                         <label class="custom-control-label" for="Ouest">Ouest</label>
                     </div>
                 </div>
                 <div class="col-lg-10 col-md-12">
-                	<%if(ressources.size()==0){ %>
-                	<h1>Ressource introuvable</h1>
-                	<h4>Veuillez recherchez</h4>
-                	<% } %>
+					<c:if test="${fn:length(ressources) eq 0}">
+                		<h1>Ressource introuvable</h1>
+                		<h4>Veuillez recherchez</h4>
+                	</c:if>
                 	<div class="row mt-4 d-flex justiy-content-center card-list-catalogue">
-                	<%for(int i=0 ; i< ressources.size(); i++) {
-                	%>              
+						<c:forEach items="${ressources}" var="ressource">
+											            
                         <div class="col-lg-3 col-md-4 col-sm-6 col-7 offset-sm-0 offset-2">
                             <div class="card">
-                                <img class="card-img-top" height="220px" width="260px" src="data:image/png;base64,<%= ressources.get(i).get(2) %>" alt="Card image cap">
+                                <img class="card-img-top" height="220px" width="260px" src="data:image/png;base64,<c:out value="${ressource[2]}" />" alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title text-center"><%= ressources.get(i).get(0) %></h5>
-                                    <p class="card-text text-center"><%= ressources.get(i).get(1) %></p>
+                                    <h5 class="card-title text-center"><c:out value="${ressource[0]}" /></h5>
+                                    <p class="card-text text-center"><c:out value="${ressource[1]}" /></p>
                                     <div class="row">
                                         <div class="col-2"></div>
                                         <div class="col-8 ">
@@ -239,62 +251,71 @@
                                 </div>
                             </div>
                         </div>
-                        <%      
-                        }%>
+						</c:forEach>
                         </div>                       
-                		<% if (pages > 0) {
-                		%>
+						<c:if test="${pages > 0}">
                         <nav class="mt-5 d-flex align-items-center flex-column" aria-label="Page navigation example">
                         <ul class="pagination">
-                            <% if (current == 1) { %>                       
+                        	<c:choose>                        	
+							<c:when test="${current eq 1}">
 	                            <li class="page-item disabled">
 	                                <a class="page-link" href="#" aria-label="First">
 	                                    <span aria-hidden="true">First</span>
 	                                    <span class="sr-only">First</span>
 	                                </a>
 	                            </li>
-	                        <% } else { %>	   
+	                        </c:when>
+						    <c:otherwise>	                            
 	                        	<li class="page-item">
-	                                <a class="page-link" href="${pageContext.request.contextPath}/Catalogue<%= ((search!=null) ? "?search="+search : "") %><%= "&"+catFiltre %>" aria-label="First">
+	                                <a class="page-link" href="${pageContext.request.contextPath}/Catalogue<c:out value="?search=${search}" default=""/><c:out value="&${catFilter}" default=""/>"
+									aria-label="First">
 	                                    <span aria-hidden="true">First</span>
 	                                	<span class="sr-only">First</span>
 	                                </a>
 	                            </li>     
-	                        <% } %>	    
-	                        <% int i = ( current > 5 ? current- 4 : 1) ; %>
-	                        <% if (i != 1) { %>	
+	                        </c:otherwise>
+	                        </c:choose>
+	                        <c:if test="${i !=1 }">
                      	        <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-                     	    <% } %>   
-                     	    <% for (; i <= (current + 4) && i <= pages; i++) { %>
-                     	    	<% if (i == current) { %>    
-	                              <li class="page-item active"><a class="page-link"><%= i %><span
-	                                        class="sr-only">(current)</span></a></li>   
-	                            <% } else { %>
-                            		<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Catalogue?<%= ((search!=null) ? "search="+search+"&" : "") %><%= catFiltre %>page=<%= i %>"><%= i %></a></li>	                            
-                        		<% } %>            
-                        	    <% if (i == current + 4 && i < pages) { %>
-                            		<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-                        		<% } %>	    	                 	 
-                        	<% } %>
-                    		<% if (current == pages) { %>
+                     	    </c:if>
+                     	    <c:forEach var="j" begin="${i}" end="${min_loop}" step="1" >
+                     	    	<c:choose>                     	    
+                     	    	<c:when test="${j eq current }" >
+                     	   			<li class="page-item active"><a class="page-link"><c:out value="${ j }" /><span
+	                                        class="sr-only">(current)</span></a></li>  
+                     	    	</c:when>
+                     	    	<c:otherwise>
+                     	   			<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Catalogue?<c:out value="search=${search}&" default=""/><c:out value="${catFilter}" default=""/><c:out value="page=${j}" default=""/>" >
+                     	   			<c:out value="${j}" /></a></li>                                                 	    	
+                     	    	</c:otherwise>
+                     	    	</c:choose>
+                     	    	<c:if test="${j eq current+4 && j < pages }" >
+                     	   			<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                     	    	</c:if>
+                     	    </c:forEach>
+							<c:choose>
+                     	    	<c:when test="${current eq pages}" >
                         		<li class="page-item disabled">
                                 	<a class="page-link" href="#" aria-label="Last">
                                     	<span aria-hidden="true">Last</span>
                                     	<span class="sr-only">Last</span>
                                 	</a>
                             	</li>
-                    		<% } else { %>
-                        		<li class="page-item">
-                                	<a class="page-link" href="${pageContext.request.contextPath}/Catalogue?<%= ((search!=null) ? "search="+search+"&" : "") %><%= catFiltre %>page=<%= pages %>" aria-label="Last">
+                      			</c:when>
+                      			<c:otherwise>
+                      			<li class="page-item">
+                                	<a class="page-link" href="${pageContext.request.contextPath}/Catalogue?<c:out value="search=${search}&" default=""/><c:out value="${catFilter}" default=""/><c:out value="page=${pages}" default=""/>" 
+                                	aria-label="Last">
                                     	<span aria-hidden="true">Last</span>
                                     	<span class="sr-only">Last</span>
                                 	</a>
                             	</li>
-                    		<% } %>                     	    	                        	                      	                                                    
-                           
+                      			</c:otherwise>
+                      		</c:choose>                            
+
                         </ul>
-                        <%} %>
-                    </nav>                  
+                    </nav>
+                    </c:if>                                     
                     </div>
 
                     

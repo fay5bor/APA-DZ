@@ -9,18 +9,18 @@
         </button>
         <div class="collapse navbar-collapse " id="navbarTogglerDemo01">
 
-            <ul class="navbar-nav mr-auto ml-md-5 ml-sm-0">
+            <ul class="navbar-nav mr-auto ml-lg-5 ml-sm-0">
 
-                <li class="nav-item mr-5">
+                <li class="nav-item mr-4">
                     <a class="nav-link" href="${pageContext.request.contextPath}/Catalogue">Ressources</a>
                 </li>
-                <li class="nav-item mr-5">
+                <li class="nav-item mr-4">
                     <a class="nav-link" href="#">Instituts</a>
                 </li>
-                <li class="nav-item mr-5">
+                <li class="nav-item mr-4">
                     <a class="nav-link" href="#">Reglementations</a>
                 </li>
-                <li class="nav-item mr-5">
+                <li class="nav-item mr-4">
                     <a class="nav-link" href="#">A propos</a>
                 </li>
 

@@ -356,7 +356,9 @@ xsigin/signup popup
   color: rgb(0, 0, 0);
 }
 
-@media only screen and (max-width: 600px) {
+
+
+@media (max-width: 767.98px) {
     .nav-searchbar{
         width: 50%;
     }
@@ -379,7 +381,8 @@ xsigin/signup popup
     }
 
 } 
-@media only screen and (min-width: 600px) {
+
+@media only screen and (min-width: 768px){
     .banner-overlay {
         padding-top: 360px; /*312*/
         padding-bottom:15px; /*30*/

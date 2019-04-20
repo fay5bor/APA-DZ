@@ -96,15 +96,17 @@ public class RessourceManager {
 		}
 	}
 	
-	static public ArrayList<ArrayList> getPageRessources(int perPage, int page, String search, ArrayList<String> categoriesList){
+	static public ArrayList<ArrayList<String>> getPageRessources(int perPage, int page, String search,
+			ArrayList<String> categoriesList, ArrayList<String> regionsList){
 		int skip = (perPage*page) - perPage;
-		ArrayList<ArrayList> output = new ArrayList<ArrayList>();
+		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
 		ConnectDB connect = new ConnectDB();
 		Connection connection = null;
 	    ResultSet resultat = null;
 	    int categoriesListSize= categoriesList.size();
+
 		String query= "";
-		String whereClause=(categoriesListSize==0 ) ? "" : "WHERE ";
+		String whereClause=(categoriesListSize==0) ? "" : "WHERE ";
 		try {
 			connection = connect.getConnection();
 
@@ -113,6 +115,7 @@ public class RessourceManager {
 				if (i<categoriesListSize-1)
 					whereClause+=" OR ";
 			}
+
 			if (search!= null &&  !search.isEmpty()) {
 				if (whereClause.isEmpty())
 					whereClause="Where ";
@@ -124,7 +127,6 @@ public class RessourceManager {
 			query += "Select nom, type, image from ressource_gen \n"+
 					 whereClause + " \n" +
 					 "order by update_date desc OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
-			System.out.println(query);
 			PreparedStatement ps = connection.prepareStatement(query);
 			int i=1;
 			for (String categorie : categoriesList) {
@@ -187,7 +189,6 @@ public class RessourceManager {
 			}
 			query += "SELECT COUNT (*) as count from ressource_gen \n"+
 					 whereClause ;
-			System.out.println(query);
 			PreparedStatement ps = connection.prepareStatement(query);
 			int i=1;
 			for (String categorie : categoriesList) {

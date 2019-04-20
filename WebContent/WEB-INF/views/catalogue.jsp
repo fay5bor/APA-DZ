@@ -15,8 +15,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/ressources/vendors/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/ressources/vendors/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/ressources/css/style.css">
-    <style>
-        .search-container {
+<style type="text/css">
+/*Catalogue css*/
+  .search-container {
             height: 70px;
         }
 
@@ -27,7 +28,6 @@
 
         .search-bar-input {
             border: 0;
-            width: 90% !important;
             border-radius: 0%;
             border-right: 2px solid #2dd393
         }
@@ -41,9 +41,56 @@
         .search-bar {
             border-bottom: 3px solid #2dd393;
             border-top: 3px solid #2dd393;
-            height: 100%
         }
-    </style>
+
+
+
+@media (max-width: 575.98px) { 
+	.card-list-catalogue div:not(:first-child) {
+		margin-top : 35px;
+	}
+	.search-bar-input {
+        width: 95% !important;
+  	}
+  	.mobile-filter-btn{
+		margin-left : -24px
+	}
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
+ 	.card-list-catalogue :nth-child(n+3){
+		margin-top : 35px;
+	}
+	.search-bar-input {
+        width: 96% !important;
+  	}
+  	.mobile-filter-btn{
+		margin-left : -19px
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+	.card-list-catalogue :nth-child(n+4){
+		margin-top : 35px;
+	} 
+	.search-bar-input {
+        width: 97% !important;
+  	}
+  	.mobile-filter-btn{
+		margin-left : -14px
+	}
+}
+
+@media (min-width: 992px)  {
+	.card-list-catalogue :nth-child(n+5){
+		margin-top : 35px;
+	}
+	.search-bar-input {
+        width: 97% !important;
+  	}
+
+}
+
+</style>
 </head>
 
 <body>
@@ -56,6 +103,11 @@
    	   for(String cat: categorie){
    			catFiltre+="categorie="+cat+"&";
    	   }
+	   ArrayList<String> region = (ArrayList<String>) request.getAttribute("region");
+   	   String regionFiltre = ""  ;
+   	   for(String reg: region){
+   			regionFiltre+="region="+reg+"&";
+   	   }
 	%>
 	<jsp:include page="parts/nav-bar2.jsp"></jsp:include>	
 	
@@ -64,15 +116,58 @@
     <div class="m-4">
         <!--                     Search                                              -->
         <div class="row search-container">
-            <div class="col-2 mt-2">
-                     <button form="searchForm" type="submit" class="btn btn-block my-btn ">Filtrer</button>                              
+            <div class="d-none d-lg-block col-lg-2 mt-2">
+                     <button form="searchForm" type="submit" class="btn btn-block my-btn ">
+					<i class="fas fa-filter"></i>
+                     Filtrer
+                     </button>                              
                 <!-- <a href="#" class="btn btn-block my-btn ">Ajouter Ressource</a> -->
             </div>
-            <div class="col-10">
-                <form id="searchForm" method="get" action="${pageContext.request.contextPath}/Catalogue" class="form-inline my-2 my-lg-0 search-bar pl-3">
+            <div class="col-lg-10 col-md-12">
+            	<div class="row search-bar">
+            	<div class="col-lg-12 col-11">
+            	<form id="searchForm" method="get" action="${pageContext.request.contextPath}/Catalogue" class="form-inline my-2 pl-3">
                     <i class="fas fa-search search-bar-icon"></i>
                     <input name="search" class="form-control search-bar-input" type="search" placeholder="Search" aria-label="Search" value="<%= ((search!=null) ? search : "") %>" >
                 </form>
+            	</div>
+            	<div class="d-block d-lg-none d-xl-none col-1 mt-2">
+            		<a class="btn mobile-filter-btn my-btn dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fas fa-filter"></i>
+        			</a>
+        			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          				<div class="dropdown-item">
+          					<h5>Action</h5>
+							<div class="custom-control custom-checkbox">
+	                        	<input form="searchForm" name="categorie" value="Forestiere" type="checkbox" class="custom-control-input" id="Forestiere" <%= (categorie.contains("Forestiere")) ? "checked" : ""  %>>
+	                        	<label class="custom-control-label" for="Forestiere">Forestiere</label><br>
+	                   		</div>
+	                    	<div class="custom-control custom-checkbox">
+	                        	<input form="searchForm" name="categorie" value="Microorganismes" type="checkbox" class="custom-control-input" id="Microorganismes" <%= (categorie.contains("Microorganismes")) ? "checked" : ""  %> >
+	                        	<label class="custom-control-label" for="Microorganismes">Microorganismes</label>
+	                    	</div>
+	                    	<div class="custom-control custom-checkbox">
+		                        <input form="searchForm" name="categorie" value="Agriculture" type="checkbox" class="custom-control-input" id="Agriculture" <%= (categorie.contains("Agriculture")) ? "checked" : ""  %>>
+	                        	<label class="custom-control-label" for="Agriculture">Agriculture</label>
+	                    	</div>
+	                    	<div class="custom-control custom-checkbox">
+		                        <input form="searchForm" name="categorie" value="Marine" type="checkbox" class="custom-control-input" id="Marine" <%= (categorie.contains("Marine")) ? "checked" : ""  %>>
+		                        <label class="custom-control-label" for="Marine">Marine</label>
+	                    	</div>
+	                    	<div class="custom-control custom-checkbox">
+	                        	<input form="searchForm" name="categorie" value="Alimentaire" type="checkbox" class="custom-control-input" id="Alimentaire" <%= (categorie.contains("Alimentaire")) ? "checked" : ""  %>>
+	                        	<label class="custom-control-label" for="Alimentaire">Alimentaire</label>
+	                    	</div>
+          				</div>
+          				<br/>
+        			</div>
+                    <!-- <button form="searchForm" type="submit" class="btn mobile-filter-btn my-btn ">
+					 <i class="fas fa-filter"></i>
+                     </button> -->                              
+            	</div>
+            	</div>
+
+
             </div>
 
         </div>
@@ -80,7 +175,7 @@
         <!--                     /Search                                              -->
         <div class="">
             <div class="row">
-                <div class="col-2">
+                <div class="d-none d-lg-block col-lg-2">
                     
                     <h4>Catégorie</h4>
                     <div class="custom-control custom-checkbox">
@@ -102,19 +197,34 @@
                     <div class="custom-control custom-checkbox">
                         <input form="searchForm" name="categorie" value="Alimentaire" type="checkbox" class="custom-control-input" id="Alimentaire" <%= (categorie.contains("Alimentaire")) ? "checked" : ""  %>>
                         <label class="custom-control-label" for="Alimentaire">Alimentaire</label>
-                    </div> 
+                    </div> <br/>
+                    <h4>Région</h4>
+                    <div class="custom-control custom-checkbox">
+                        <input form="searchForm" name="region" value="Nord" type="checkbox" class="custom-control-input" id="Nord" <%= (region.contains("Nord")) ? "checked" : ""  %>>
+                        <label class="custom-control-label" for="Nord">Nord</label><br>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input form="searchForm" name="region" value="Sud" type="checkbox" class="custom-control-input" id="Sud" <%= (region.contains("Sud")) ? "checked" : ""  %> >
+                        <label class="custom-control-label" for="Sud">Sud</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input form="searchForm" name="region" value="Est" type="checkbox" class="custom-control-input" id="Est" <%= (region.contains("Est")) ? "checked" : ""  %>>
+                        <label class="custom-control-label" for="Est">Est</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input form="searchForm" name="region" value="Ouest" type="checkbox" class="custom-control-input" id="Ouest" <%= (region.contains("Ouest")) ? "checked" : ""  %>>
+                        <label class="custom-control-label" for="Ouest">Ouest</label>
+                    </div>
                 </div>
-                <div class="col-10">
+                <div class="col-lg-10 col-md-12">
                 	<%if(ressources.size()==0){ %>
                 	<h1>Ressource introuvable</h1>
                 	<h4>Veuillez recherchez</h4>
                 	<% } %>
-                	<%for(int i=0 ; i< ressources.size(); ) {
-                			if(i%3 == 0){
+                	<div class="row mt-4 d-flex justiy-content-center card-list-catalogue">
+                	<%for(int i=0 ; i< ressources.size(); i++) {
                 	%>              
-                    		<div class="row d-flex justify-content-around  mt-4">
-                    <%		} %>
-                        <div class="col-3">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-7 offset-sm-0 offset-2">
                             <div class="card">
                                 <img class="card-img-top" height="220px" width="260px" src="data:image/png;base64,<%= ressources.get(i).get(2) %>" alt="Card image cap">
                                 <div class="card-body">
@@ -129,12 +239,10 @@
                                 </div>
                             </div>
                         </div>
-                        <% i++; 	
-                           if(i%3 == 0 || i== ressources.size()){ %>
-                        		</div>
-                        <%  }       
-                        }
-                		if (pages > 0) {
+                        <%      
+                        }%>
+                        </div>                       
+                		<% if (pages > 0) {
                 		%>
                         <nav class="mt-5 d-flex align-items-center flex-column" aria-label="Page navigation example">
                         <ul class="pagination">
@@ -160,7 +268,7 @@
                      	    <% for (; i <= (current + 4) && i <= pages; i++) { %>
                      	    	<% if (i == current) { %>    
 	                              <li class="page-item active"><a class="page-link"><%= i %><span
-	                                        class="sr-only">(current)</a></li>   
+	                                        class="sr-only">(current)</span></a></li>   
 	                            <% } else { %>
                             		<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Catalogue?<%= ((search!=null) ? "search="+search+"&" : "") %><%= catFiltre %>page=<%= i %>"><%= i %></a></li>	                            
                         		<% } %>            
@@ -194,13 +302,10 @@
             </div>
 
         </div>
-    </div>
-
-
     <!--                     /Catalogue                                              -->
 
     
-
+    <script src="${pageContext.request.contextPath}/ressources/vendors/popper/popper.min.js"></script>    
     <script src="${pageContext.request.contextPath}/ressources/vendors/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/ressources/vendors/magnific-popup/jquery.magnific-popup.js"></script>
     <script src="${pageContext.request.contextPath}/ressources/vendors/bootstrap/js/bootstrap.min.js"></script>

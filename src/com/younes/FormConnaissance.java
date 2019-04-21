@@ -1,7 +1,5 @@
 package com.younes;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -15,6 +13,8 @@ import javax.servlet.http.Part;
 
 import com.younes.bdd.ConnaissanceMng;
 import com.younes.beans.Connaissance;
+
+import utils.Utils;
 
 /**
  * Servlet implementation class FormConnaissance
@@ -70,8 +70,8 @@ public class FormConnaissance extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int idChercheur = 1;
-			Connaissance connaissance = null;
-			int TAILLE_TAMPON = 10240; //taille du tampon pour extraire la photo id : 10 ko
+		Connaissance connaissance = null;
+			
 		
 		if ( request.getParameter("idRessource") != null ) {
 			connaissance = new Connaissance();
@@ -79,6 +79,9 @@ public class FormConnaissance extends HttpServlet {
 			connaissance.setIdRessource(Integer.parseInt(request.getParameter("idRessource")));
 		} else if ( request.getParameter("idConnaissance") != null ) {
 			connaissance = ConnaissanceMng.getConnaissanceById(Integer.parseInt(request.getParameter("idConnaissance")));
+		} else { // Normalement ce cas n'existe pas parce que dans la jsp on a if idRessource else idConnaissance mais je l'ai ajouté pour évité les imprévus
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return;
 		}
 		
 		
@@ -90,48 +93,13 @@ public class FormConnaissance extends HttpServlet {
 		connaissance.setContenu(request.getParameter("detailConnaissance"));
 		
 		Part idPhotoInput = request.getPart("id-photo-input");
-		String nomidPhotoInput = getNomFichier(idPhotoInput);
-		
-		if ( nomidPhotoInput != null && !nomidPhotoInput.isEmpty() ) {
-	        
-	        BufferedInputStream entree = null;
-	        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-	        byte[] tampon = new byte[TAILLE_TAMPON];
-	        
-	        try {
-	            /* Ouvre les flux. */
-	            entree = new BufferedInputStream( idPhotoInput.getInputStream(), TAILLE_TAMPON );
-                try {
-                    for (int readNum; (readNum = entree.read(tampon)) != -1;) {
-                        bos.write(tampon, 0, readNum);
-                    }
-                } catch (IOException ex) { }
-                
-                connaissance.setImg(bos.toByteArray());
-	        } finally {
-	            try {
-	                bos.close();
-	            } catch ( IOException ignore ) { }
-	            try {
-	                entree.close();
-	            } catch ( IOException ignore ) { }
-	        }
-	    }
+		connaissance.setImg(Utils.ImageToByte(idPhotoInput));
 		
 		ConnaissanceMng.addConnaissance(connaissance);
 		request.setAttribute("connaissance", connaissance);
 	    this.getServletContext().getRequestDispatcher( "/FicheConnaissance").forward( request, response );
 	}
 	
-	private static String getNomFichier( Part part ) {
-		
-	    for ( String contentDisposition : part.getHeader( "content-disposition" ).split( ";" ) ) {
-	        if ( contentDisposition.trim().startsWith("filename") ) {
-	            /* Si "filename" est présent, alors renvoi du nom de fichier. */
-	            return contentDisposition.substring( contentDisposition.indexOf( '=' ) + 1 );
-	        }
-	    }
-	    return null;
-	}
+	
 
 }

@@ -1,16 +1,31 @@
 package com.younes;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import com.younes.bdd.ConnaissanceMng;
+import com.younes.beans.Connaissance;
 
 /**
  * Servlet implementation class FormConnaissance
  */
 @WebServlet(description = "La page pour introduire une connaissance", urlPatterns = { "/FormConnaissance" })
+/* TODO : on deployment change tmp path to C:\ for windows or / for linux */
+@MultipartConfig(	
+					fileSizeThreshold=1024*1024*10, 	// taille fichier pour qu'il soit mis en dossier temp : 10 MB 
+					maxFileSize=1024*1024*25,      	// taille maximale d'un fichier : 25 MB
+					maxRequestSize=1024*1024*25*2)   	// taille maximale dans une requête multipart : 50 MB
+
 public class FormConnaissance extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +41,25 @@ public class FormConnaissance extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("path", "Source Categorie > Source Name > Connaissance");
+
+		if (request.getParameter("id_con") != null) {
+			 
+			Connaissance connaissance = ConnaissanceMng.getConnaissanceById(Integer.parseInt(request.getParameter("id_con")));
+			request.setAttribute("connaissance", connaissance);
+			
+			int idRessource = connaissance.getIdRessource();	
+			HashMap<String, String> pathMap = ConnaissanceMng.getConnaissancePath(idRessource);
+			String categorie = pathMap.get("type");
+			String ressource = pathMap.get("nom");
+			request.setAttribute("path", categorie + " > " + ressource + " > " + connaissance.getTitre());
+		} else {			
+			if  (request.getParameter("id_ressource") == null) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+				return;
+			}
+			request.setAttribute("id_ressource", request.getParameter("id_ressource"));
+			request.setAttribute("path", "Création d'une nouvelle connaissance");
+		}
 		
 		this.getServletContext().getRequestDispatcher( "/WEB-INF/views/FormConnaissance.jsp" ).forward( request, response );
 	}
@@ -35,8 +68,70 @@ public class FormConnaissance extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		int idChercheur = 1;
+			Connaissance connaissance = null;
+			int TAILLE_TAMPON = 10240; //taille du tampon pour extraire la photo id : 10 ko
+		
+		if ( request.getParameter("idRessource") != null ) {
+			connaissance = new Connaissance();
+			connaissance.setIdConnaissance(0);
+			connaissance.setIdRessource(Integer.parseInt(request.getParameter("idRessource")));
+		} else if ( request.getParameter("idConnaissance") != null ) {
+			connaissance = ConnaissanceMng.getConnaissanceById(Integer.parseInt(request.getParameter("idConnaissance")));
+		}
+		
+		
+		/* TODO : secure titre, type, resume entries */
+		connaissance.setIdChercheur(idChercheur);
+		connaissance.setTitre(request.getParameter("nomConnaissance"));
+		connaissance.setType(request.getParameter("typeConnaissance"));
+		connaissance.setResume(request.getParameter("resumeConnaissance"));
+		connaissance.setContenu(request.getParameter("detailConnaissance"));
+		
+		Part idPhotoInput = request.getPart("id-photo-input");
+		String nomidPhotoInput = getNomFichier(idPhotoInput);
+		
+		if ( nomidPhotoInput != null && !nomidPhotoInput.isEmpty() ) {
+	        
+	        BufferedInputStream entree = null;
+	        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	        byte[] tampon = new byte[TAILLE_TAMPON];
+	        
+	        try {
+	            /* Ouvre les flux. */
+	            entree = new BufferedInputStream( idPhotoInput.getInputStream(), TAILLE_TAMPON );
+                try {
+                    for (int readNum; (readNum = entree.read(tampon)) != -1;) {
+                        bos.write(tampon, 0, readNum);
+                    }
+                } catch (IOException ex) { }
+                
+                connaissance.setImg(bos.toByteArray());
+	        } finally {
+	            try {
+	                bos.close();
+	            } catch ( IOException ignore ) { }
+	            try {
+	                entree.close();
+	            } catch ( IOException ignore ) { }
+	        }
+	    }
+		
+		ConnaissanceMng.addConnaissance(connaissance);
+		request.setAttribute("connaissance", connaissance);
+	    this.getServletContext().getRequestDispatcher( "/FicheConnaissance").forward( request, response );
+	}
+	
+	private static String getNomFichier( Part part ) {
+		
+	    for ( String contentDisposition : part.getHeader( "content-disposition" ).split( ";" ) ) {
+	        if ( contentDisposition.trim().startsWith("filename") ) {
+	            /* Si "filename" est présent, alors renvoi du nom de fichier. */
+	            return contentDisposition.substring( contentDisposition.indexOf( '=' ) + 1 );
+	        }
+	    }
+	    return null;
 	}
 
 }

@@ -64,7 +64,17 @@
 				<div class="shadow p-2 mb-4 bg-white h-100">
 					<div class="row m-2 p-2 mb-4">
 						<div class="col-sm-3 py-3">
-								<img alt="id photo" src="data:image/png;base64,${requestScope.connaissance.getImgString()}" class="rounded w-100">
+							<c:choose>
+								<c:when test="${empty requestScope.connaissance.getImg()}">
+									<img alt="id photo" src="${pageContext.request.contextPath}/ressources/images/default_image.png" class="rounded w-100">
+								</c:when>
+								<c:when test="${!empty requestScope.connaissance.getImg()}">
+									<img alt="id photo" src="data:image/png;base64,${requestScope.connaissance.getImgString()}" class="rounded w-100">
+								</c:when>
+							</c:choose>
+						
+						
+								
 						</div>
 						<div class="col-sm-9 my-1">
 							<h1><c:out value="${requestScope.connaissance.getTitre()}" default="Nom de la connaissance"/></h1>

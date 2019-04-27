@@ -73,29 +73,46 @@ public class FormConnaissance extends HttpServlet {
 		Connaissance connaissance = null;
 			
 		
-		if ( request.getParameter("idRessource") != null ) {
+		if ( request.getParameter("idRessource") != null ) { //Cas d'une nouvelle connaissance
 			connaissance = new Connaissance();
 			connaissance.setIdConnaissance(0);
 			connaissance.setIdRessource(Integer.parseInt(request.getParameter("idRessource")));
-		} else if ( request.getParameter("idConnaissance") != null ) {
+			
+			/* TODO : secure titre, type, resume entries */
+			connaissance.setIdChercheur(idChercheur);
+			connaissance.setTitre(request.getParameter("nomConnaissance"));
+			connaissance.setType(request.getParameter("typeConnaissance"));
+			//Ce ternaire est ajouter pour le cas où aucun résumé n'est introduit : on met null pour avoir la valeur par défault à l'affichage
+			String resumeConnaissance = request.getParameter("resumeConnaissance").isEmpty() ? null : request.getParameter("resumeConnaissance");   
+			connaissance.setResume(resumeConnaissance);
+			connaissance.setContenu(request.getParameter("detailConnaissance"));
+			
+			Part idPhotoInput = request.getPart("id-photo-input");
+			connaissance.setImg(Utils.ImageToByte(idPhotoInput));
+			
+			ConnaissanceMng.addConnaissance(connaissance);
+			
+		} else if ( request.getParameter("idConnaissance") != null ) { //Cas d'une modification de connaissance
 			connaissance = ConnaissanceMng.getConnaissanceById(Integer.parseInt(request.getParameter("idConnaissance")));
-		} else { // Normalement ce cas n'existe pas parce que dans la jsp on a if idRessource else idConnaissance mais je l'ai ajouté pour évité les imprévus
+			
+			/* TODO : secure titre, type, resume entries */
+			connaissance.setIdChercheur(idChercheur);
+			connaissance.setTitre(request.getParameter("nomConnaissance"));
+			connaissance.setType(request.getParameter("typeConnaissance"));
+			
+			//Ce ternaire est ajouter pour le cas où aucun résumé n'est introduit : on met null pour avoir la valeur par défault à l'affichage
+			String resumeConnaissance = request.getParameter("resumeConnaissance") == "" ? null : request.getParameter("resumeConnaissance");   
+			connaissance.setResume(resumeConnaissance);
+			connaissance.setContenu(request.getParameter("detailConnaissance"));
+			
+			Part idPhotoInput = request.getPart("id-photo-input");
+			connaissance.setImg(Utils.ImageToByte(idPhotoInput));
+		} else { 
+			// Normalement ce cas n'existe pas parce que dans la jsp on a if idRessource else idConnaissance mais je l'ai ajouté pour évité les imprévus
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
 		
-		
-		/* TODO : secure titre, type, resume entries */
-		connaissance.setIdChercheur(idChercheur);
-		connaissance.setTitre(request.getParameter("nomConnaissance"));
-		connaissance.setType(request.getParameter("typeConnaissance"));
-		connaissance.setResume(request.getParameter("resumeConnaissance"));
-		connaissance.setContenu(request.getParameter("detailConnaissance"));
-		
-		Part idPhotoInput = request.getPart("id-photo-input");
-		connaissance.setImg(Utils.ImageToByte(idPhotoInput));
-		
-		ConnaissanceMng.addConnaissance(connaissance);
 		request.setAttribute("connaissance", connaissance);
 	    this.getServletContext().getRequestDispatcher( "/FicheConnaissance").forward( request, response );
 	}

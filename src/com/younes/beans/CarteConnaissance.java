@@ -37,6 +37,7 @@ public class CarteConnaissance {
 		return image;
 	}
 	public String getImageString() {
+		if (this.image == null) return null; //pour éviter le cas où on ne choisit pas de photo dans le formulaire 
 		byte[] fileBytes = Base64.getEncoder().encode(image);
 		try {
 			return new String(fileBytes, "UTF-8");

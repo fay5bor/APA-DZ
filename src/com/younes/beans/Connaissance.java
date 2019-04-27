@@ -54,6 +54,9 @@ public class Connaissance {
 		return img;
 	}
 	public String getImgString() {
+		
+		if (this.img == null) return null; //pour éviter le cas où on ne choisit pas de photo dans le formulaire
+		
 		byte[] fileBytes = Base64.getEncoder().encode(img);
 		try {
 			return new String(fileBytes, "UTF-8");

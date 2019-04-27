@@ -27,24 +27,26 @@ public class Utils {
      return bytes; 
     }
 
-	private static String getNomFichier( Part part ) {
-		
+	public static String getNomFichier( Part part ) {
+		String output = null;
 	    for ( String contentDisposition : part.getHeader( "content-disposition" ).split( ";" ) ) {
 	        if ( contentDisposition.trim().startsWith("filename") ) {
 	            /* Si "filename" est présent, alors renvoi du nom de fichier. */
-	            return contentDisposition.substring( contentDisposition.indexOf( '=' ) + 1 );
+	        	output = contentDisposition.substring( contentDisposition.indexOf( '=' ) + 1 );
+	            return output;
 	        }
 	    }
-	    return null;
+	    return output;
 	}
 
 	public static byte [] ImageToByte(Part imageInput) {
 		
 		int TAILLE_TAMPON = 10240; //taille du tampon pour extraire la photo id : 10 ko
-		String nomidPhotoInput = getNomFichier(imageInput);
 		
+		//Ce ternaire est pour le cas où on n'ajoute pas de photo pour retourner null
+		String nomidPhotoInput = getNomFichier(imageInput).equals("\"\"") ? null : getNomFichier(imageInput);
+
 		if ( nomidPhotoInput != null && !nomidPhotoInput.isEmpty() ) {
-	        
 	        BufferedInputStream entree = null;
 	        ByteArrayOutputStream bos = new ByteArrayOutputStream();
 	        byte[] tampon = new byte[TAILLE_TAMPON];

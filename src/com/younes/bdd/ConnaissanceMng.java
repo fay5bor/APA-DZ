@@ -153,15 +153,26 @@ public class ConnaissanceMng {
 		try {
 			connection = ConnectDB.getConnection();
 
-			ps = connection.prepareStatement(
-					"INSERT INTO connaissance (id_ressource, id_chercheur, titre, type, contenu, image, resume) VALUES (?, ?, ?, ?, ?, ?, ?)");
-			ps.setInt(1, connaissance.getIdRessource());
-			ps.setInt(2, connaissance.getIdChercheur());
-			ps.setString(3, connaissance.getTitre());
-			ps.setString(4, connaissance.getType());
-			ps.setString(5, connaissance.getContenu());
-			ps.setBytes(6, connaissance.getImg());
-			ps.setString(7, connaissance.getResume());
+			if (connaissance.getImg() == null) { //le cas où on n'introduit de photo pour mettre la photo par default
+				ps = connection.prepareStatement(
+						"INSERT INTO connaissance (id_ressource, id_chercheur, titre, type, contenu, resume) VALUES (?, ?, ?, ?, ?, ?)");
+				ps.setInt(1, connaissance.getIdRessource());
+				ps.setInt(2, connaissance.getIdChercheur());
+				ps.setString(3, connaissance.getTitre());
+				ps.setString(4, connaissance.getType());
+				ps.setString(5, connaissance.getContenu());
+				ps.setString(6, connaissance.getResume());
+			} else {
+				ps = connection.prepareStatement(
+						"INSERT INTO connaissance (id_ressource, id_chercheur, titre, type, contenu, image, resume) VALUES (?, ?, ?, ?, ?, ?, ?)");
+				ps.setInt(1, connaissance.getIdRessource());
+				ps.setInt(2, connaissance.getIdChercheur());
+				ps.setString(3, connaissance.getTitre());
+				ps.setString(4, connaissance.getType());
+				ps.setString(5, connaissance.getContenu());
+				ps.setBytes(6, connaissance.getImg());
+				ps.setString(7, connaissance.getResume());
+			}
 			
 			ps.executeUpdate();
 			

@@ -32,7 +32,7 @@ public class ConnaissanceMng {
 			output.setType(rs.getString( "type" ));
 			output.setContenu(rs.getString( "contenu" ));
 			output.setResume(rs.getString( "resume" ));
-            output.setImg(rs.getBytes("image"));
+            output.setImage(rs.getBytes("image"));
 			ps.close();
 			ps = connection
 					.prepareStatement("SELECT id_chercheur, nom, prenom, laboratoire FROM chercheur WHERE id_chercheur = " + String.valueOf(output.getIdChercheur()));
@@ -153,7 +153,7 @@ public class ConnaissanceMng {
 		try {
 			connection = ConnectDB.getConnection();
 
-			if (connaissance.getImg() == null) { //le cas où on n'introduit de photo pour mettre la photo par default
+			if (connaissance.getImage() == null) { //le cas où on n'introduit de photo pour mettre la photo par default
 				ps = connection.prepareStatement(
 						"INSERT INTO connaissance (id_ressource, id_chercheur, titre, type, contenu, resume) VALUES (?, ?, ?, ?, ?, ?)");
 				ps.setInt(1, connaissance.getIdRessource());
@@ -170,7 +170,7 @@ public class ConnaissanceMng {
 				ps.setString(3, connaissance.getTitre());
 				ps.setString(4, connaissance.getType());
 				ps.setString(5, connaissance.getContenu());
-				ps.setBytes(6, connaissance.getImg());
+				ps.setBytes(6, connaissance.getImage());
 				ps.setString(7, connaissance.getResume());
 			}
 			

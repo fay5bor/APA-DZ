@@ -11,6 +11,18 @@ import javax.servlet.http.Part;
 
 public class Utils {
 	
+	public static String getNomFichier( Part part ) {
+		String output = null;
+	    for ( String contentDisposition : part.getHeader( "content-disposition" ).split( ";" ) ) {
+	        if ( contentDisposition.trim().startsWith("filename") ) {
+	            /* Si "filename" est présent, alors renvoi du nom de fichier. */
+	        	output = contentDisposition.substring( contentDisposition.indexOf( '=' ) + 1 );
+	            return output;
+	        }
+	    }
+	    return output;
+	}
+	
 	public static byte [] ImageToByte(File file) throws FileNotFoundException{
         FileInputStream fis = new FileInputStream(file);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -26,18 +38,6 @@ public class Utils {
      
      return bytes; 
     }
-
-	public static String getNomFichier( Part part ) {
-		String output = null;
-	    for ( String contentDisposition : part.getHeader( "content-disposition" ).split( ";" ) ) {
-	        if ( contentDisposition.trim().startsWith("filename") ) {
-	            /* Si "filename" est présent, alors renvoi du nom de fichier. */
-	        	output = contentDisposition.substring( contentDisposition.indexOf( '=' ) + 1 );
-	            return output;
-	        }
-	    }
-	    return output;
-	}
 
 	public static byte [] ImageToByte(Part imageInput) {
 		

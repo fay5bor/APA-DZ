@@ -11,7 +11,7 @@ public class Connaissance {
 	private String Type;
 	private String Resume;
 	private String Contenu;
-	private byte[] img;
+	private byte[] image;
 	
 	public int getIdConnaissance() {
 		return idConnaissance;
@@ -50,14 +50,14 @@ public class Connaissance {
 	public void setContenu(String contenu) {
 		Contenu = contenu;
 	}
-	public byte[] getImg() {
-		return img;
+	public byte[] getImage() {
+		return image;
 	}
-	public String getImgString() {
+	public String getImageString() {
 		
-		if (this.img == null) return null; //pour éviter le cas où on ne choisit pas de photo dans le formulaire
+		if (this.image == null) return null; //pour éviter le cas où on ne choisit pas de photo dans le formulaire
 		
-		byte[] fileBytes = Base64.getEncoder().encode(img);
+		byte[] fileBytes = Base64.getEncoder().encode(image);
 		try {
 			return new String(fileBytes, "UTF-8");
 		} catch (Exception e) {
@@ -65,8 +65,8 @@ public class Connaissance {
 			return null;
 		}	
 	}
-	public void setImg(byte[] img) {
-		this.img = img;
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 	
 	public String getChercheur() {

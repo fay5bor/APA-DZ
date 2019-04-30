@@ -12,7 +12,7 @@
 			<c:when test="${empty requestScope.carte.getImage()}">
 				<img alt="id photo" src="${pageContext.request.contextPath}/ressources/images/default_image.png" class="rounded w-100">
 			</c:when>
-			<c:when test="${!empty requestScope.connaissance.getImage()}">
+			<c:when test="${!empty requestScope.carte.getImage()}">
 				<img alt="id photo" src="data:image/png;base64,${requestScope.carte.getImageString()}" class="rounded w-100">
 			</c:when>
 		</c:choose>

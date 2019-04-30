@@ -55,14 +55,14 @@
 									<img
 									id="id-photo-affich"
 									alt="id photo"
-									src="data:image/png;base64,${requestScope.connaissance.getImgString()}"
+									src="data:image/png;base64,${requestScope.connaissance.getImageString()}"
 									style="cursor: pointer; width:100%;" class="rounded m-1 p-1 shadow-sm">
 								</c:when>
 							</c:choose>
 							
 						</span>
 						<input
-						type="file" class="custom-file-input" id="id-photo-input" name="id-photo-input" >
+						type="file" class="custom-file-input" id="id-photo-input" name="id-photo-input" onchange="return fileValidation()" >
 					</label>
 				</div>
 				<div class="col-sm-9 mt-1">
@@ -190,21 +190,25 @@
 	</script>
 	<!-- JS pour charger la photo de connaissance en preview -->
 	<script>
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				
-				reader.onload = function(e) {
-					$('#id-photo-affich').attr('src', e.target.result);
-				}
-				
-				  reader.readAsDataURL(input.files[0]);
-			}
+		function fileValidation(){
+		    var fileInput = document.getElementById('id-photo-input');
+		    var filePath = fileInput.value;
+		    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+		    if(!allowedExtensions.exec(filePath)){
+		        alert('L\'image chargée doit être d\'extensions .jpeg .jpg .png .gif seulement.');
+		        fileInput.value = '';
+		        return false;
+		    }else{
+		        //Image preview
+		        if (fileInput.files && fileInput.files[0]) {
+		            var reader = new FileReader();
+		            reader.onload = function(e) {
+		            	$('#id-photo-affich').attr('src', e.target.result);
+		            };
+		            reader.readAsDataURL(fileInput.files[0]);
+		        }
+		    }
 		}
-			
-		$("#id-photo-input").change(function() {
-			readURL(this);
-		});
 	</script>
 </body>
 </html>

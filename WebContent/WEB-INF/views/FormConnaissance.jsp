@@ -52,11 +52,22 @@
 									style="cursor: pointer; width:100%;" class="rounded m-1 p-1 shadow-sm">
 								</c:when>
 								<c:when test="${!empty requestScope.connaissance}">
-									<img
-									id="id-photo-affich"
-									alt="id photo"
-									src="data:image/png;base64,${requestScope.connaissance.getImageString()}"
-									style="cursor: pointer; width:100%;" class="rounded m-1 p-1 shadow-sm">
+									<c:choose>
+										<c:when test="${empty requestScope.connaissance.getImage()}">
+											<img
+											id="id-photo-affich"
+											alt="id photo"
+											src="${pageContext.request.contextPath}/ressources/images/add-image.svg"
+											style="cursor: pointer; width:100%;" class="rounded m-1 p-1 shadow-sm">
+										</c:when>
+										<c:when test="${!empty requestScope.connaissance}">
+											<img
+											id="id-photo-affich"
+											alt="id photo"
+											src="data:image/png;base64,${requestScope.connaissance.getImageString()}"
+											style="cursor: pointer; width:100%;" class="rounded m-1 p-1 shadow-sm">
+										</c:when>
+									</c:choose>
 								</c:when>
 							</c:choose>
 							
@@ -78,12 +89,14 @@
 					</div>
 
 					<div class="form-group">
-						<!-- <label for="typeConnaissance">Catégorie de cette connaissance</label> -->
-						<input type="text" class="form-control rounded"
-							id="typeConnaissance" name="typeConnaissance"
-							placeholder="Type de la connaissance"
-							value="<c:out value='${requestScope.connaissance.getType()}'/>"
-							required>
+						<label for="typeConnaissance">Catégorie de cette connaissance</label>
+						<select class="form-control rounded"
+						id="typeConnaissance" name="typeConnaissance" required>
+						  <option value="Savoir Faire">Savoir Faire</option>
+						  <option value="Composition biologique">Composition biologique</option>
+						  <option value="Location">Location</option>
+						  <option value="Conditions de vie">Conditions de vie</option>
+						</select>
 						<div class="valid-feedback">Valid.</div>
 						<div class="invalid-feedback">SVP remplissez ce champs.</div>
 					</div>
@@ -209,6 +222,12 @@
 		        }
 		    }
 		}
+		
+		//Setting type de connaissance vers la valeur dans l'objet connaissance 
+		$(document).ready(function(){ 
+			$("#typeConnaissance").val("${requestScope.connaissance.getType()}").attr('selected', 'selected'); 
+		}); 
+		
 	</script>
 </body>
 </html>

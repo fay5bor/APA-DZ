@@ -107,6 +107,8 @@ public class FormConnaissance extends HttpServlet {
 			
 			Part idPhotoInput = request.getPart("id-photo-input");
 			connaissance.setImage(Utils.ImageToByte(idPhotoInput));
+			
+			ConnaissanceMng.updateConnaissance(connaissance);
 		} else { 
 			// Normalement ce cas n'existe pas parce que dans la jsp on a if idRessource else idConnaissance mais je l'ai ajouté pour évité les imprévus
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);

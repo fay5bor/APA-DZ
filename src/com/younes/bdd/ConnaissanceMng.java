@@ -145,7 +145,6 @@ public class ConnaissanceMng {
             }
 	}
 
-
 	static public void addConnaissance(Connaissance connaissance) {
 		PreparedStatement ps = null; 
 		Connection connection = null;
@@ -197,5 +196,58 @@ public class ConnaissanceMng {
 	        	
 	        }
 	}
+	
+	static public void updateConnaissance(Connaissance connaissance) {
+		PreparedStatement ps = null; 
+		Connection connection = null;
+	
+		try {
+			connection = ConnectDB.getConnection();
+
+			if (connaissance.getImage() == null) { //le cas où on n'introduit de photo pour mettre la photo par default
+				ps = connection.prepareStatement(
+						"UPDATE connaissance SET id_chercheur = ?, titre = ?, type = ?, contenu = ?, resume = ? WHERE id_con = ?");
+				ps.setInt(1, connaissance.getIdChercheur());
+				ps.setString(2, connaissance.getTitre());
+				ps.setString(3, connaissance.getType());
+				ps.setString(4, connaissance.getContenu());
+				ps.setString(5, connaissance.getResume());
+				ps.setInt(6, connaissance.getIdConnaissance());
+			} else {
+				ps = connection.prepareStatement(
+						"UPDATE connaissance SET id_chercheur = ?, titre = ?, type = ?, contenu = ?, image = ?, resume = ? WHERE id_con = ?");
+				ps.setInt(1, connaissance.getIdChercheur());
+				ps.setString(2, connaissance.getTitre());
+				ps.setString(3, connaissance.getType());
+				ps.setString(4, connaissance.getContenu());
+				ps.setBytes(5, connaissance.getImage());
+				ps.setString(6, connaissance.getResume());
+				ps.setInt(7, connaissance.getIdConnaissance());
+			}
+			
+			ps.executeUpdate();
+			
+	        } catch (SQLException e) {
+	            e.printStackTrace(System.err);
+	        } catch (Exception e) {
+	            e.printStackTrace(System.err);
+	        } finally {
+	        	if (ps != null)
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						e.printStackTrace(System.err);
+					}
+	        	if (connection != null) {
+	        		try {
+		        		connection.close();
+		        	} catch (Exception e) {
+		        		e.printStackTrace(System.err);
+		        	}
+	        	}
+	        	
+	        }
+	}
+	
         
 }

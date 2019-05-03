@@ -1,4 +1,4 @@
-package utils;
+package com.younes.utils;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -23,22 +23,6 @@ public class Utils {
 	    return output;
 	}
 	
-	public static byte [] ImageToByte(File file) throws FileNotFoundException{
-        FileInputStream fis = new FileInputStream(file);
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        byte[] buf = new byte[1024];
-        try {
-            for (int readNum; (readNum = fis.read(buf)) != -1;) {
-                bos.write(buf, 0, readNum);      
-                System.out.println("read " + readNum + " bytes,");
-            }
-        } catch (IOException ex) {
-        }
-        byte[] bytes = bos.toByteArray();
-     
-     return bytes; 
-    }
-
 	public static byte [] ImageToByte(Part imageInput) {
 		
 		int TAILLE_TAMPON = 10240; //taille du tampon pour extraire la photo id : 10 ko
@@ -73,5 +57,21 @@ public class Utils {
 	    }
 		return null;
      
+    }
+	
+	public static byte [] ImageToByte(File file) throws FileNotFoundException{
+        FileInputStream fis = new FileInputStream(file);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] buf = new byte[1024];
+        try {
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                bos.write(buf, 0, readNum);      
+                System.out.println("read " + readNum + " bytes,");
+            }
+        } catch (IOException ex) {
+        }
+        byte[] bytes = bos.toByteArray();
+     
+     return bytes; 
     }
 }

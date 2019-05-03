@@ -1,4 +1,4 @@
-package com.younes;
+package com.younes.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import com.younes.beans.Connaissance;
 /**
  * Servlet implementation class FicheConnaissance
  */
-@WebServlet(description = "La fiche d'une connaissance pour afficher ses détails", urlPatterns = { "/FicheConnaissance" })
+@WebServlet(description = "La fiche d'une connaissance pour afficher ses dï¿½tails", urlPatterns = { "/FicheConnaissance" })
 public class FicheConnaissance extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String VUE = "/WEB-INF/views/FicheConnaissance.jsp";

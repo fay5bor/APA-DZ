@@ -1,48 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/postgresql-jdbc-42.2.5.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jstl-1.2.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+	<classpathentry kind="src" output="target/classes" path="src">
 		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/annotations-api.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/catalina.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/catalina-ant.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/catalina-ha.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/catalina-storeconfig.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/catalina-tribes.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/ecj-4.9.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/el-api.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/jasper.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/jasper-el.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/jaspic-api.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/jsp-api.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/postgresql-jdbc-42.2.5.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-api.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-coyote.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-dbcp.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-i18n-cs.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-i18n-de.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-i18n-es.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-i18n-fr.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-i18n-ja.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-i18n-ko.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-i18n-pt-BR.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-i18n-ru.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-i18n-zh-CN.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-jdbc.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-jni.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-util.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-util-scan.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/tomcat-websocket.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-9.0.16/lib/websocket-api.jar"/>
-	<classpathentry kind="lib" path="E:/BOUGUESRI Adel/Documents/eclipse-workspace/APA-DZ-master/WebContent/WEB-INF/lib/jstl-1.2.jar"/>
-	<classpathentry kind="lib" path="E:/BOUGUESRI Adel/Documents/eclipse-workspace/APA-DZ-master/WebContent/WEB-INF/lib/postgresql-jdbc-42.2.5.jar"/>
-	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="target/generated-sources/annotations">
+		<attributes>
+			<attribute name="ignore_optional_problems" value="true"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="m2e-apt" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="target/generated-test-sources/test-annotations">
+		<attributes>
+			<attribute name="ignore_optional_problems" value="true"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="m2e-apt" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="ECLIPSE_HOME"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt_3.16.0.v20181206-0815.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.annotation_1.1.400.v20180921-1416.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.annotation_2.2.200.v20180921-1416.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.apt.core_3.6.200.v20181008-0703.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.apt.pluggable.core_1.2.300.v20181206-1038.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.apt.ui_3.6.200.v20180921-1416.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.compiler.apt_1.3.400.v20181205-0900.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.compiler.tool_1.2.400.v20181113-0926.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.core_3.16.0.v20181130-1748.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.core.manipulation_1.11.0.v20181126-0647.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.debug.ui_3.10.100.v20181120-0542.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.doc.user_3.15.100.v20181206-0718.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.junit_3.11.200.v20181016-1025.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.junit.core_3.10.200.v20181025-0713.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.junit.runtime_3.4.900.v20181012-1045.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.junit4.runtime_1.1.900.v20181123-0726.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.junit5.runtime_1.0.300.v20181003-1407.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.launching_3.12.0.v20181119-1621.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -57,6 +57,21 @@
 
 /* nav bar css*/
 
+ol, ul, li, p {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+
+ol, ul {
+    list-style: none;
+}
+
+/* nav bar css*/
 .nav-searchbar:focus{
     border: 2px solid #84B750;
     outline:none !important;
@@ -396,7 +411,9 @@ xsigin/signup popup
   color: rgb(0, 0, 0);
 }
 
-@media only screen and (max-width: 600px) {
+
+
+@media (max-width: 767.98px) {
     .nav-searchbar{
         width: 50%;
     }
@@ -419,7 +436,8 @@ xsigin/signup popup
     }
 
 } 
-@media only screen and (min-width: 600px) {
+
+@media only screen and (min-width: 768px){
     .banner-overlay {
         padding-top: 360px; /*312*/
         padding-bottom:15px; /*30*/
@@ -487,9 +505,6 @@ xsigin/signup popup
         display: none;
     }    
 } 
-
-
-
 
 /* -------------------------------- Font definition -------------------------------- */
 

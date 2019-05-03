@@ -1,4 +1,4 @@
-package com.younes;
+package com.younes.servlets;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import javax.servlet.http.Part;
 import com.younes.bdd.ConnaissanceMng;
 import com.younes.beans.Connaissance;
 
-import utils.Utils;
+import com.younes.utils.Utils;
 
 /**
  * Servlet implementation class FormConnaissance

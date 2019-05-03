@@ -1,4 +1,4 @@
-package com.younes;
+package com.younes.servlets;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 /**
  * Servlet Filter implementation class CharacterEncodingFilter
  */
-@WebFilter(description = "Ce filtre est ajouté pour assurer le décodage des parametres http en utf-8", urlPatterns = { "/*" })
+@WebFilter(description = "Ce filtre est ajoutï¿½ pour assurer le dï¿½codage des parametres http en utf-8", urlPatterns = { "/*" })
 public class CharacterEncodingFilter implements Filter {
 
     @Override

@@ -17,7 +17,7 @@
 
     <!------------------------------>
 
-   <jsp:include page="parts/nav-bar.jsp"></jsp:include>
+   <jsp:include page="parts/nav-bar2.jsp"></jsp:include>
    
    <jsp:include page="parts/banner.jsp"></jsp:include>
    

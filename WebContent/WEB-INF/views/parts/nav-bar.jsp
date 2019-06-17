@@ -2,7 +2,7 @@
  <!------------             header                   ------------------>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/Home">
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/">
                 <img src="${pageContext.request.contextPath}/ressources/images/applogo.png" width="60" height="60" alt="">
             </a>
 

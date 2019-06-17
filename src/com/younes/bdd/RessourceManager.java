@@ -106,7 +106,7 @@ public class RessourceManager {
 	    int categoriesListSize= categoriesList.size();
 
 		String query= "";
-		String whereClause=(categoriesListSize==0) ? "" : "WHERE ";
+		String whereClause=(categoriesListSize==0) ? "" : "WHERE (";
 		try {
 			connection = connect.getConnection();
 
@@ -114,6 +114,9 @@ public class RessourceManager {
 				whereClause+="type = ?";
 				if (i<categoriesListSize-1)
 					whereClause+=" OR ";
+				
+				else 
+					whereClause+=")";
 			}
 
 			if (search!= null &&  !search.isEmpty()) {
@@ -162,6 +165,7 @@ public class RessourceManager {
 			}
 
 		}
+		System.out.println(query);
 		return output;
 	}
 	static public int countRessources(String search, ArrayList<String> categoriesList ) {
@@ -171,13 +175,15 @@ public class RessourceManager {
 	    int output=0;
 	    int categoriesListSize= categoriesList.size();
 		String query= "";
-		String whereClause=(categoriesListSize==0 ) ? "" : "WHERE ";
+		String whereClause=(categoriesListSize==0 ) ? "" : "WHERE (";
 		try {
 			connection = connect.getConnection();
 			for (int i=0; i<categoriesListSize;i++) {
 				whereClause+="type = ?";
 				if (i<categoriesListSize-1)
 					whereClause+=" OR ";
+				else 
+					whereClause+=")";
 			}
 			if (search!= null &&  !search.isEmpty()) {
 				if (whereClause.isEmpty())

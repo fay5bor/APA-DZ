@@ -17,6 +17,7 @@ ol, ul {
 
 
 /* nav bar css*/
+
 .nav-searchbar:focus{
     border: 2px solid #2dd393;
     outline:none !important;

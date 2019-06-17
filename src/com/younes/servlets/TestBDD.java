@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.younes.bdd.ConnectionBdRessource;
 import com.younes.bdd.RessourceManager;
 import com.younes.utils.Utils;
 

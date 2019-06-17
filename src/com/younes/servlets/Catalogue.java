@@ -69,7 +69,7 @@ public class Catalogue extends HttpServlet {
         request.setAttribute( "ressources", ressources );
         request.setAttribute( "pages", pages );
         if (link.length()>0) {             
-        	request.setAttribute( "link", link );
+//        	request.setAttribute( "link", link );
         	System.out.println(link);
         }
 		RequestDispatcher view=request.getRequestDispatcher("WEB-INF/views/catalogue.jsp");

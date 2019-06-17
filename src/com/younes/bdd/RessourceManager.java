@@ -165,7 +165,7 @@ public class RessourceManager {
 			}
 
 		}
-		System.out.println(query);
+		//System.out.println(query);
 		return output;
 	}
 	static public int countRessources(String search, ArrayList<String> categoriesList ) {

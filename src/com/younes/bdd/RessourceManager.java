@@ -10,9 +10,10 @@ import java.sql.Statement;
 public class RessourceManager {
 	static public ArrayList<String> getRessourceGenById(int id) {
 		ArrayList<String> output = new ArrayList<String>();
+		ConnectDB connect = new ConnectDB();
 		Connection connection = null;
 		try {
-			connection = ConnectDB.getConnection();
+			connection = connect.getConnection();
 			// String byteImg="";
 			PreparedStatement ps = connection
 					.prepareStatement("SELECT nom, contenu, type, image FROM ressource_gen WHERE id_ressource = ?");
@@ -39,9 +40,10 @@ public class RessourceManager {
 	
 
 	static public void addRessourceGen(String nom, String contenu, String type, byte[] img) {
+		ConnectDB connect = new ConnectDB();
 		Connection connection = null;
 		try {
-			connection = ConnectDB.getConnection();
+			connection = connect.getConnection();
 			PreparedStatement ps;
 			if (img==null || img.length==0)				
 				ps = connection.prepareStatement(
@@ -71,9 +73,10 @@ public class RessourceManager {
 	}
 	
 	static public void deleteAllRessources() {
+		ConnectDB connect = new ConnectDB();
 		Connection connection = null;
 		try {
-			connection = ConnectDB.getConnection();
+			connection = connect.getConnection();
 
 			Statement statement = connection.createStatement();
 
@@ -97,19 +100,23 @@ public class RessourceManager {
 			ArrayList<String> categoriesList, ArrayList<String> regionsList){
 		int skip = (perPage*page) - perPage;
 		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
+		ConnectDB connect = new ConnectDB();
 		Connection connection = null;
 	    ResultSet resultat = null;
 	    int categoriesListSize= categoriesList.size();
 
 		String query= "";
-		String whereClause=(categoriesListSize==0) ? "" : "WHERE ";
+		String whereClause=(categoriesListSize==0) ? "" : "WHERE (";
 		try {
-			connection = ConnectDB.getConnection();
+			connection = connect.getConnection();
 
 			for (int i=0; i<categoriesListSize;i++) {
 				whereClause+="type = ?";
 				if (i<categoriesListSize-1)
 					whereClause+=" OR ";
+				
+				else 
+					whereClause+=")";
 			}
 
 			if (search!= null &&  !search.isEmpty()) {
@@ -158,22 +165,25 @@ public class RessourceManager {
 			}
 
 		}
+		System.out.println(query);
 		return output;
 	}
 	static public int countRessources(String search, ArrayList<String> categoriesList ) {
-		
+		ConnectDB connect = new ConnectDB();
 		Connection connection = null;
 	    ResultSet resultat = null;
 	    int output=0;
 	    int categoriesListSize= categoriesList.size();
 		String query= "";
-		String whereClause=(categoriesListSize==0 ) ? "" : "WHERE ";
+		String whereClause=(categoriesListSize==0 ) ? "" : "WHERE (";
 		try {
-			connection = ConnectDB.getConnection();
+			connection = connect.getConnection();
 			for (int i=0; i<categoriesListSize;i++) {
 				whereClause+="type = ?";
 				if (i<categoriesListSize-1)
 					whereClause+=" OR ";
+				else 
+					whereClause+=")";
 			}
 			if (search!= null &&  !search.isEmpty()) {
 				if (whereClause.isEmpty())

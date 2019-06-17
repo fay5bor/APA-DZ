@@ -1,6 +1,6 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light pl-5 pr-5">
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/Home">
+        <a class="navbar-brand" href="${pageContext.request.contextPath}">
             <img src="${pageContext.request.contextPath}/ressources/images/applogo.png" width="60" height="60" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"

@@ -36,6 +36,12 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.4.1208</version>
 		</dependency>
+		<!-- https://developers.google.com/api-client-library/java/apis/drive/v3 -->
+		<dependency>
+			<groupId>com.google.apis</groupId>
+			<artifactId>google-api-services-drive</artifactId>
+			<version>v3-rev165-1.25.0</version>
+		</dependency>
 	</dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>

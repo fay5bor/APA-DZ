@@ -44,20 +44,34 @@ public class Catalogue extends HttpServlet {
         
         ArrayList<ArrayList<String>> ressources = RessourceManager.getPageRessources(perPage, page, search, categoriesList, regionsList);
         int pages = (int)(Math.ceil((double)RessourceManager.countRessources(search, categoriesList)/perPage)) ;
+        String link = "";
+        if (search!=null && search.length()>0) 
+        	link = "?search="+search;
         String catFiltre = ""  ;
        	for(String cat: categoriesList){
        		catFiltre+="categorie="+cat+"&";
        	}
+       	if (catFiltre.length() > 0)
+       		if (link.length()>0)
+       			link += "&"+catFiltre.substring(0, catFiltre.length() - 1);
+       		else 
+       			link = "?"+catFiltre.substring(0, catFiltre.length() - 1);
        	String regionFiltre = ""  ;
        	for(String reg: regionsList){
        		regionFiltre+="region="+reg+"&";
        	}
-        
+       	if (regionFiltre.length() > 0)
+       		if (link.length()>0)
+       			link += "&"+regionFiltre.substring(0, regionFiltre.length() - 1);
+       		else 
+       			link += "?"+regionFiltre.substring(0, regionFiltre.length() - 1);
+
         request.setAttribute( "ressources", ressources );
         request.setAttribute( "pages", pages );
-        request.setAttribute( "catFiltre", catFiltre );
-        request.setAttribute( "regionFiltre", regionFiltre );
-
+        if (link.length()>0) {             
+//        	request.setAttribute( "link", link );
+        	System.out.println(link);
+        }
 		RequestDispatcher view=request.getRequestDispatcher("WEB-INF/views/catalogue.jsp");
 		view.forward(request, response);
 	}

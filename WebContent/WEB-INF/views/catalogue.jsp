@@ -1,5 +1,7 @@
 <%@page import="org.eclipse.jdt.core.compiler.CategorizedProblem"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"
@@ -108,7 +110,14 @@
 	<c:set var="min_loop">
 		<c:out value="${current+4 >= pages ? pages : current+4}" />
 	</c:set>
-
+	<c:choose>                        	
+		<c:when test="${empty link}">
+			<c:set var = "sep" value = "?"/>
+	    </c:when>
+		<c:otherwise>	                            	                        
+			<c:set var = "sep" value = "&"/>
+	    </c:otherwise>
+	</c:choose>
 	
 	<jsp:include page="parts/nav-bar2.jsp"></jsp:include>	
 	
@@ -267,7 +276,7 @@
 	                        </c:when>
 						    <c:otherwise>	                            
 	                        	<li class="page-item">
-	                                <a class="page-link" href="${pageContext.request.contextPath}/Catalogue<c:out value="?search=${search}" default=""/><c:out value="&${catFilter}" default=""/>"
+	                                <a class="page-link" href="${pageContext.request.contextPath}/Catalogue<c:out value="${link}" default=""/>"
 									aria-label="First">
 	                                    <span aria-hidden="true">First</span>
 	                                	<span class="sr-only">First</span>
@@ -285,7 +294,7 @@
 	                                        class="sr-only">(current)</span></a></li>  
                      	    	</c:when>
                      	    	<c:otherwise>
-                     	   			<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Catalogue?<c:out value="search=${search}&" default=""/><c:out value="${catFilter}" default=""/><c:out value="page=${j}" default=""/>" >
+                     	   			<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Catalogue<c:out value="${link}" default=""/><c:out value= "${sep}" /><c:out value="page=${j}" default=""/>" >
                      	   			<c:out value="${j}" /></a></li>                                                 	    	
                      	    	</c:otherwise>
                      	    	</c:choose>
@@ -304,7 +313,7 @@
                       			</c:when>
                       			<c:otherwise>
                       			<li class="page-item">
-                                	<a class="page-link" href="${pageContext.request.contextPath}/Catalogue?<c:out value="search=${search}&" default=""/><c:out value="${catFilter}" default=""/><c:out value="page=${pages}" default=""/>" 
+                                	<a class="page-link" href="${pageContext.request.contextPath}/Catalogue<c:out value="${link}" default=""/><c:out value= "${sep}" /><c:out value="page=${pages}" default=""/>" 
                                 	aria-label="Last">
                                     	<span aria-hidden="true">Last</span>
                                     	<span class="sr-only">Last</span>

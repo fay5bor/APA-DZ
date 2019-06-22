@@ -4,12 +4,12 @@
   <env-entry>
     <env-entry-name>devurl</env-entry-name>
     <env-entry-type>java.lang.String</env-entry-type>
-    <env-entry-value>jdbc:postgresql://localhost:5432/apadz</env-entry-value>
+    <env-entry-value>jdbc:postgresql://localhost:5433/apadz</env-entry-value>
   </env-entry>
   <env-entry>
     <env-entry-name>devpwd</env-entry-name>
     <env-entry-type>java.lang.String</env-entry-type>
-    <env-entry-value>postgres</env-entry-value>
+    <env-entry-value>adel1</env-entry-value>
   </env-entry>
   <env-entry>
     <env-entry-name>devuser</env-entry-name>

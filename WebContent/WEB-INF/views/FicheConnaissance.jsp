@@ -57,46 +57,47 @@
 	        <input name="search" class="form-control search-bar-input" type="search" placeholder="Search" aria-label="Search" value="${empty search ? search : ''}" >
 	    </form>
     </div>
-		<div class="row px-2">
-			<div class="col-sm-9 border border-left-0 border-top-0 border-bottom-0 container">
-				<div class="rounded w-100 shadow-sm p-1 mb-2 bg-light"> <h4>${path}</h4> </div>
-				
-				<div class="shadow p-2 mb-4 bg-white h-100">
-					<div class="row m-2 p-2 mb-4">
-						<div class="col-sm-3 py-3">
-							<c:choose>
-								<c:when test="${empty requestScope.connaissance.getImage()}">
-									<img alt="id photo" src="${pageContext.request.contextPath}/ressources/images/default_image.png" class="rounded w-100">
-								</c:when>
-								<c:when test="${!empty requestScope.connaissance.getImage()}">
-									<img alt="id photo" src="data:image/png;base64,${requestScope.connaissance.getImageString()}" class="rounded w-100">
-								</c:when>
-							</c:choose>
-						
-						
-								
-						</div>
-						<div class="col-sm-9 my-1">
-							<h1><c:out value="${requestScope.connaissance.getTitre()}" default="Nom de la connaissance"/></h1>
-							<h4><c:out value="${requestScope.connaissance.getChercheur()}" default="Nom de l'auteur"/></h4>
-							<h4><c:out value="${requestScope.connaissance.getType()}" default="Type de la connaissance"/></h4>
-							<a href="FormConnaissance?id_con=${requestScope.connaissance.getIdConnaissance()}" class="btn my-btn-outline">Modifier</a>
+	<div class="row px-2">
+		<div class="col-sm-9 border border-left-0 border-top-0 border-bottom-0 container">
+			<div class="rounded w-100 shadow-sm p-1 mb-2 bg-light"> <h4>${path}</h4> </div>
+			
+			<div class="shadow p-2 mb-4 bg-white h-100">
+				<div class="row m-2 p-2 mb-4">
+					<div class="col-sm-3 py-3">
+						<c:choose>
+							<c:when test="${empty requestScope.connaissance.getImage()}">
+								<img alt="id photo" src="${pageContext.request.contextPath}/ressources/images/default_image.png" class="rounded w-100">
+							</c:when>
+							<c:when test="${!empty requestScope.connaissance.getImage()}">
+								<img alt="id photo" src="data:image/png;base64,${requestScope.connaissance.getImageString()}" class="rounded w-100">
+							</c:when>
+						</c:choose>
+					
+					
 							
-						</div>
 					</div>
-					<hr class="w-75"/>
-					<p class="mx-3" style =" align: justify;"><c:out value="${requestScope.connaissance.getContenu()}" default="Détails sur la connaissance" escapeXml="false"/></p>
+					<div class="col-sm-9 my-1">
+						<h1><c:out value="${requestScope.connaissance.getTitre()}" default="Nom de la connaissance"/></h1>
+						<h4><c:out value="${requestScope.connaissance.getChercheur()}" default="Nom de l'auteur"/></h4>
+						<h4><c:out value="${requestScope.connaissance.getType()}" default="Type de la connaissance"/></h4>
+						<a href="FormConnaissance?id_con=${requestScope.connaissance.getIdConnaissance()}" class="btn my-btn-outline">Modifier</a>
+						
+					</div>
 				</div>
-  			</div>
-			<div class="col-sm-3">
-				<div class="rounded w-100 shadow-sm p-1 mb-2 bg-light"> <h4>Autres</h4> </div>
-				<c:forEach   items="${cartes}" var="carte">
-					<c:set var="carte" value="${carte}" scope="request"/>
-					<c:import url="parts/CarteConnaissance.jsp"/>
-				</c:forEach>
+				<hr class="w-75"/>
+				<p class="mx-3" style =" align: justify;"><c:out value="${requestScope.connaissance.getContenu()}" default="Détails sur la connaissance" escapeXml="false"/></p>
 			</div>
-  				
+ 			</div>
+		<div class="col-sm-3">
+			<div class="rounded w-100 shadow-sm p-1 mb-2 bg-light"> <h4>Autres</h4> </div>
+			<c:forEach   items="${cartes}" var="carte">
+				<c:set var="carte" value="${carte}" scope="request"/>
+				<c:import url="parts/CarteConnaissance.jsp"/>
+			</c:forEach>
 		</div>
+ 				
+	</div>
+	
 	<!-- --------------------------------------- JavaScript --------------------------------------- -->
 	<script src="${pageContext.request.contextPath}/ressources/js/java-script.js"></script>
 	<script src="${pageContext.request.contextPath}/ressources/vendors/jquery/jquery.min.js"></script>

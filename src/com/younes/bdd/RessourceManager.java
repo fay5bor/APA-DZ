@@ -127,9 +127,33 @@ public class RessourceManager {
 				whereClause+="to_tsvector('French', nom ) @@ to_tsquery( ? )";
 
 			}
-			query += "Select nom, type, image from ressource_gen \n"+
-					 whereClause + " \n" +
-					 "order by update_date desc OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+			query += "Select id_ressource, nom, type, image, update_date from ressource_gen \n"+
+					 whereClause ;
+			
+			
+			if (regionsList.size()>0) {
+				query = "Select nom, type, image, update_date from ( \n"
+						+ "avoir inner join (" + query +") as h on h.id_ressource=avoir.id_ressource ) as l "
+								+ "inner join localisation on localisation.localisation_id=l.localisation_id ";				whereClause = "WHERE ";
+				whereClause = "WHERE (";
+				for (int i=0; i<regionsList.size();i++) {
+					whereClause+="region = ?";
+					if (i<regionsList.size()-1)
+						whereClause+=" OR ";
+							
+					else 
+						whereClause+=") ";
+					}
+				query+=whereClause+ "order by update_date desc OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+			}else {
+				query+= "order by update_date desc OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+			}
+			System.out.println("-------------------");
+
+			System.out.println(query);
+			
+			System.out.println("-------------------");
+
 			PreparedStatement ps = connection.prepareStatement(query);
 			int i=1;
 			for (String categorie : categoriesList) {
@@ -140,6 +164,11 @@ public class RessourceManager {
 				ps.setString(i, search);
 				i++;
 			}
+			for (String region : regionsList) {
+				ps.setString(i, region);
+				i++;
+			}
+			
 			ps.setInt(i, skip);i++;	
 			ps.setInt(i, perPage);
 			resultat = ps.executeQuery();
@@ -168,23 +197,27 @@ public class RessourceManager {
 		System.out.println(query);
 		return output;
 	}
-	static public int countRessources(String search, ArrayList<String> categoriesList ) {
+	static public int countRessources(String search, ArrayList<String> categoriesList, 
+			ArrayList<String> regionsList) {
 		ConnectDB connect = new ConnectDB();
 		Connection connection = null;
 	    ResultSet resultat = null;
 	    int output=0;
 	    int categoriesListSize= categoriesList.size();
 		String query= "";
-		String whereClause=(categoriesListSize==0 ) ? "" : "WHERE (";
+		String whereClause=(categoriesListSize==0) ? "" : "WHERE (";
 		try {
 			connection = connect.getConnection();
+
 			for (int i=0; i<categoriesListSize;i++) {
 				whereClause+="type = ?";
 				if (i<categoriesListSize-1)
 					whereClause+=" OR ";
+				
 				else 
 					whereClause+=")";
 			}
+
 			if (search!= null &&  !search.isEmpty()) {
 				if (whereClause.isEmpty())
 					whereClause="Where ";
@@ -193,8 +226,26 @@ public class RessourceManager {
 				whereClause+="to_tsvector('French', nom ) @@ to_tsquery( ? )";
 
 			}
-			query += "SELECT COUNT (*) as count from ressource_gen \n"+
+			query += "Select id_ressource, nom, type, image, update_date from ressource_gen \n"+
 					 whereClause ;
+			
+			
+			if (regionsList.size()>0) {
+				query = "Select nom, type, image, update_date from ( \n"
+						+ "avoir inner join (" + query +") as h on h.id_ressource=avoir.id_ressource ) as l "
+								+ "inner join localisation on localisation.localisation_id=l.localisation_id ";				whereClause = "WHERE ";
+				whereClause = "WHERE (";
+				for (int i=0; i<regionsList.size();i++) {
+					whereClause+="region = ?";
+					if (i<regionsList.size()-1)
+						whereClause+=" OR ";
+							
+					else 
+						whereClause+=") ";
+					}
+				query+=whereClause;
+			}
+			query = "SELECT COUNT (*) as count from ("+ query+") as l";
 			PreparedStatement ps = connection.prepareStatement(query);
 			int i=1;
 			for (String categorie : categoriesList) {
@@ -203,6 +254,10 @@ public class RessourceManager {
 			}
 			if (search!= null &&  !search.isEmpty() ) {
 				ps.setString(i, search);
+				i++;
+			}
+			for (String region : regionsList) {
+				ps.setString(i, region);
 				i++;
 			}
 		

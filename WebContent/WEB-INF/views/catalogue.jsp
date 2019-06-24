@@ -48,7 +48,22 @@
         }
 
 
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:28px;
+	right:40px;
+	background-color:#2dd393;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
 
+.my-float{
+	margin-top:22px;
+}
 @media (max-width: 575.98px) { 
 	.card-list-catalogue div:not(:first-child) {
 		margin-top : 35px;
@@ -123,46 +138,15 @@
 	
 	
     <!--                     Catalogue                                              -->
-    <div class="m-4">
         <!--                     Search                                              -->
-        <div class="row search-container">
-            <div class="d-none d-lg-block col-lg-2 mt-2">
-                     <button form="searchForm" type="submit" class="btn btn-block my-btn ">
+        <div class="row m-4">
+            <div class="d-none d-lg-block col-lg-2 mt-1 search-container" >
+                     <button form="searchForm" type="submit" class="btn btn-block my-btn h-75">
 					<i class="fas fa-filter"></i>
                      Filtrer
                      </button>                              
                 <!-- <a href="#" class="btn btn-block my-btn ">Ajouter Ressource</a> -->
-            </div>
-            <div class="col-lg-10 col-md-12">
-            	<div class="row search-bar">
-            	<div class="col-lg-12 col-11">
-            	<form id="searchForm" method="get" action="${pageContext.request.contextPath}/Catalogue" class="form-inline my-2 pl-3">
-                    <i class="fas fa-search search-bar-icon"></i>
-                    <input name="search" class="form-control search-bar-input" type="search" placeholder="Search" aria-label="Search" value="<c:out value="${search}" default="" />">
-                </form>
-            	</div>
-            	<div class="d-block d-lg-none d-xl-none col-1 mt-2">
-            		<a class="btn mobile-filter-btn my-btn dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="fas fa-filter"></i>
-        			</a>
-        			
-                    <!-- <button form="searchForm" type="submit" class="btn mobile-filter-btn my-btn ">
-					 <i class="fas fa-filter"></i>
-                     </button> -->                              
-            	</div>
-            	</div>
-
-
-            </div>
-
-        </div>
-
-        <!--                     /Search                                              -->
-        <div class="">
-            <div class="row">
-                <div class="d-none d-lg-block col-lg-2">
-                    
-                    <h4>Catégorie</h4>
+                                <h4 class="mt-4">Catégorie</h4>
                     <div class="custom-control custom-checkbox">
                         <input form="searchForm" name="categorie" value="Forestiere" type="checkbox" class="custom-control-input" id="Forestiere"
                            	<c:forEach items="${paramValues.categorie}" var="item">
@@ -236,8 +220,28 @@
                         />
                         <label class="custom-control-label" for="Ouest">Ouest</label>
                     </div>
-                </div>
-                <div class="col-lg-10 col-md-12">
+            </div>
+            <div class="col-lg-10 col-md-12">
+            	<div class="row search-bar">
+            	<div class="col-lg-12 col-11">
+            	<form id="searchForm" method="get" action="${pageContext.request.contextPath}/Catalogue" class="form-inline my-2 pl-3">
+                    <i class="fas fa-search search-bar-icon"></i>
+                    <input name="search" class="form-control search-bar-input" type="search" placeholder="Search" aria-label="Search" value="<c:out value="${search}" default="" />">
+                </form>
+            	</div>
+            	<div class="d-block d-lg-none d-xl-none col-1 mt-2">
+            		<a class="btn mobile-filter-btn my-btn dropdown-toggle" href="#exampleModal" data-toggle="modal" data-target="#exampleModal" >
+						<i class="fas fa-filter"></i>
+        			</a>
+
+
+
+                    <!-- <button form="searchForm" type="submit" class="btn mobile-filter-btn my-btn ">
+					 <i class="fas fa-filter"></i>
+                     </button> -->                              
+            	</div>
+            	</div>
+
 					<c:if test="${fn:length(ressources) eq 0}">
                 		<h1>Ressource introuvable</h1>
                 		<h4>Veuillez recherchez</h4>
@@ -324,15 +328,36 @@
 
                         </ul>
                     </nav>
-                    </c:if>                                     
-                    </div>
-
-                    
-                </div>
+                    </c:if> 
             </div>
 
         </div>
+
+        <!--                     /Search                                              -->
+
+		<a href="#" class="float">
+			<i class="fa fa-plus my-float"></i>
+		</a>
     <!--                     /Catalogue                                              -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     
     <script src="${pageContext.request.contextPath}/ressources/vendors/popper/popper.min.js"></script>    

@@ -43,7 +43,7 @@ public class Catalogue extends HttpServlet {
 		
         
         ArrayList<ArrayList<String>> ressources = RessourceManager.getPageRessources(perPage, page, search, categoriesList, regionsList);
-        int pages = (int)(Math.ceil((double)RessourceManager.countRessources(search, categoriesList)/perPage)) ;
+        int pages = (int)(Math.ceil((double)RessourceManager.countRessources(search, categoriesList, regionsList)/perPage)) ;
         String link = "";
         if (search!=null && search.length()>0) 
         	link = "?search="+search;

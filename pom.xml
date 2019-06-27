@@ -36,13 +36,35 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.4.1208</version>
 		</dependency>
+		
+		<!-- DEPENDENCIES ADDED BY FAY -->
 		<!-- https://developers.google.com/api-client-library/java/apis/drive/v3 -->
 		<dependency>
 			<groupId>com.google.apis</groupId>
 			<artifactId>google-api-services-drive</artifactId>
 			<version>v3-rev165-1.25.0</version>
 		</dependency>
-	</dependencies>
+		<!-- https://github.com/googleapis/google-api-java-client -->
+		<dependency>
+	      <groupId>com.google.api-client</groupId>
+	      <artifactId>google-api-client</artifactId>
+	      <version>1.30.0</version>
+	    </dependency>
+	    <!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-java6 -->
+		<dependency>
+		    <groupId>com.google.oauth-client</groupId>
+		    <artifactId>google-oauth-client-java6</artifactId>
+		    <version>1.11.0-beta</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty -->
+		<dependency>
+		    <groupId>com.google.oauth-client</groupId>
+		    <artifactId>google-oauth-client-jetty</artifactId>
+		    <version>1.11.0-beta</version>
+		</dependency>			
+		<!-- END FAY DEPENDECIES -->
+		
+		</dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>

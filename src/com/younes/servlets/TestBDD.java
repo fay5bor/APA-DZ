@@ -34,22 +34,21 @@ public class TestBDD extends HttpServlet {
         for (int i=0; i<100; i++) {
         	String nom= "nom_"+i;
     		String contenu ="contenu_"+i;
-    		String type = "";
+    		int type = 2;
         	if (i<20) {	   
-        		type = "Forestiere";
 	        	RessourceManager.addRessourceGen(nom, contenu, type, byteImage);
 	        	
         	}else if (i< 40) {	        	
-        		type = "Microorganismes";
+        		type = 3;
 	        	RessourceManager.addRessourceGen(nom, contenu, type, null);	        	
         	}else if (i<60) {
-        		type = "Agriculture";
+        		type =2 ;
 	        	RessourceManager.addRessourceGen(nom, contenu, type, null);
         	}else if (i<80) {
-        		type = "Marine";
+        		type = 2;
 	        	RessourceManager.addRessourceGen(nom, contenu, type, byteImage);        	
 	        }else {	        		
-        		type = "Alimentaire";
+        		type = 3;
 	        	RessourceManager.addRessourceGen(nom, contenu, type, null);        	}
 
         }

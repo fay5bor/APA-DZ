@@ -147,46 +147,17 @@
                      </button>                              
                 <!-- <a href="#" class="btn btn-block my-btn ">Ajouter Ressource</a> -->
                                 <h4 class="mt-4">Catégorie</h4>
+                    <c:forEach items="${types}" var="type">                                
                     <div class="custom-control custom-checkbox">
-                        <input form="searchForm" name="categorie" value="Forestiere" type="checkbox" class="custom-control-input" id="Forestiere"
+                        <input form="searchForm" name="categorie" value="${ type}" type="checkbox" class="custom-control-input" id="${type }"
                            	<c:forEach items="${paramValues.categorie}" var="item">
-								<c:out  value="${fn:contains(item, 'Forestiere')? 'checked' : ''}" />
+								<c:out  value="${fn:contains(item, type)? 'checked' : ''}" />
 							</c:forEach>    
                         />
-                        <label class="custom-control-label" for="Forestiere">Forestiere</label><br>
+                        <label class="custom-control-label" for="${type }"><c:out  value="${type}" /></label><br>
                     </div>
-                    <div class="custom-control custom-checkbox">
-                        <input form="searchForm" name="categorie" value="Microorganismes" type="checkbox" class="custom-control-input" id="Microorganismes"
-                            <c:forEach items="${paramValues.categorie}" var="item">
-								<c:out  value="${fn:contains(item, 'Microorganismes')? 'checked' : ''}" />
-							</c:forEach>    
-                        />
-                        <label class="custom-control-label" for="Microorganismes">Microorganismes</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input form="searchForm" name="categorie" value="Agriculture" type="checkbox" class="custom-control-input" id="Agriculture"
-                          	<c:forEach items="${paramValues.categorie}" var="item">
-								<c:out  value="${fn:contains(item, 'Agriculture')? 'checked' : ''}" />
-							</c:forEach>     
-                        />
-                        <label class="custom-control-label" for="Agriculture">Agriculture</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input form="searchForm" name="categorie" value="Marine" type="checkbox" class="custom-control-input" id="Marine"
-                          	<c:forEach items="${paramValues.categorie}" var="item">
-								<c:out  value="${fn:contains(item, 'Marine')? 'checked' : ''}" />
-							</c:forEach>     
-                        />
-                        <label class="custom-control-label" for="Marine">Marine</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input form="searchForm" name="categorie" value="Alimentaire" type="checkbox" class="custom-control-input" id="Alimentaire"
-                        	<c:forEach items="${paramValues.categorie}" var="item">
-								<c:out  value="${fn:contains(item, 'Alimentaire')? 'checked' : ''}" />
-							</c:forEach>   
-                        />
-                        <label class="custom-control-label" for="Alimentaire">Alimentaire</label>
-                    </div> <br/>
+                    </c:forEach>
+                    <br/>
                     <h4>Région</h4>
                     <div class="custom-control custom-checkbox">
                         <input form="searchForm" name="region" value="Nord" type="checkbox" class="custom-control-input" id="Nord"
@@ -230,7 +201,7 @@
                 </form>
             	</div>
             	<div class="d-block d-lg-none d-xl-none col-1 mt-2">
-            		<a class="btn mobile-filter-btn my-btn dropdown-toggle" href="#exampleModal" data-toggle="modal" data-target="#exampleModal" >
+            		<a class="btn mobile-filter-btn my-btn dropdown-toggle connect-item2" href="#exampleModal" data-toggle="modal" data-target="#exampleModal" >
 						<i class="fas fa-filter"></i>
         			</a>
 
@@ -339,25 +310,91 @@
 			<i class="fa fa-plus my-float"></i>
 		</a>
     <!--                     /Catalogue                                              -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+     <div class="my-modal mt-5">
+            <!-- this is the entire modal form, including the background -->
+            <div class="my-modal-container">
+         
+                    <!-- log in form -->
+                    <h2 class="text-center mt-5 my-sec-text">Filtrer</h2>
+                                           <h4 class="mt-4">Catégorie</h4>
+                    <div class="custom-control custom-checkbox">
+                        <input form="searchForm" name="categorie" value="Forestiere" type="checkbox" class="custom-control-input" id="Forestiere_mob"
+                           	<c:forEach items="${paramValues.categorie}" var="item">
+								<c:out  value="${fn:contains(item, 'Forestiere')? 'checked' : ''}" />
+							</c:forEach>    
+                        />
+                        <label class="custom-control-label" for="Forestiere_mob">Forestiere</label><br>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input form="searchForm" name="categorie" value="Microorganismes" type="checkbox" class="custom-control-input" id="Microorganismes_mob"
+                            <c:forEach items="${paramValues.categorie}" var="item">
+								<c:out  value="${fn:contains(item, 'Microorganismes')? 'checked' : ''}" />
+							</c:forEach>    
+                        />
+                        <label class="custom-control-label" for="Microorganismes_mob">Microorganismes</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input form="searchForm" name="categorie" value="Agriculture" type="checkbox" class="custom-control-input" id="Agriculture_mob"
+                          	<c:forEach items="${paramValues.categorie}" var="item">
+								<c:out  value="${fn:contains(item, 'Agriculture')? 'checked' : ''}" />
+							</c:forEach>     
+                        />
+                        <label class="custom-control-label" for="Agriculture_mob">Agriculture</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input form="searchForm" name="categorie" value="Marine" type="checkbox" class="custom-control-input" id="Marine_mob"
+                          	<c:forEach items="${paramValues.categorie}" var="item">
+								<c:out  value="${fn:contains(item, 'Marine')? 'checked' : ''}" />
+							</c:forEach>     
+                        />
+                        <label class="custom-control-label" for="Marine_mob">Marine</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input form="searchForm" name="categorie" value="Alimentaire" type="checkbox" class="custom-control-input" id="Alimentaire_mob"
+                        	<c:forEach items="${paramValues.categorie}" var="item">
+								<c:out  value="${fn:contains(item, 'Alimentaire')? 'checked' : ''}" />
+							</c:forEach>   
+                        />
+                        <label class="custom-control-label" for="Alimentaire_mob">Alimentaire</label>
+                    </div> <br/>
+                    <h4>Région</h4>
+                    <div class="custom-control custom-checkbox">
+                        <input form="searchForm" name="region" value="Nord" type="checkbox" class="custom-control-input" id="Nord_mob"
+             		        <c:forEach items="${paramValues.region}" var="item">
+								<c:out  value="${fn:contains(item, 'Nord')? 'checked' : ''}" />
+							</c:forEach> 
+                          />
+                        <label class="custom-control-label" for="Nord_mob">Nord</label><br>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input form="searchForm" name="region" value="Sud" type="checkbox" class="custom-control-input" id="Sud_mob"
+                        	<c:forEach items="${paramValues.region}" var="item">
+								<c:out  value="${fn:contains(item, 'Sud')? 'checked' : ''}" />
+							</c:forEach>                         
+                        />
+                        <label class="custom-control-label" for="Sud_mob">Sud</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input form="searchForm" name="region" value="Est" type="checkbox" class="custom-control-input" id="Est_mob"
+                        	<c:forEach items="${paramValues.region}" var="item">
+								<c:out  value="${fn:contains(item, 'Est')? 'checked' : ''}" />
+							</c:forEach>                           
+                        />
+                        <label class="custom-control-label" for="Est_mob">Est</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input form="searchForm" name="region" value="Ouest" type="checkbox" class="custom-control-input" id="Ouest_mob"
+                        	<c:forEach items="${paramValues.region}" var="item">
+								<c:out  value="${fn:contains(item, 'Ouest')? 'checked' : ''}" />
+							</c:forEach>                           
+                        />
+                        <label class="custom-control-label" for="Ouest_mob">Ouest</label>
+                    </div>
+                    <!-- <a href="#0" class="cd-close-form">Close</a> -->
+
+                <a href="#0" class="cd-close-form">Close</a>
+            </div> <!-- cd-user-modal-container -->
+        </div> <!-- cd-user-modal -->
 
     
     <script src="${pageContext.request.contextPath}/ressources/vendors/popper/popper.min.js"></script>    

@@ -66,8 +66,11 @@ public class Catalogue extends HttpServlet {
        		else 
        			link += "?"+regionFiltre.substring(0, regionFiltre.length() - 1);
 
-        request.setAttribute( "ressources", ressources );
+       	ArrayList<String> types = RessourceManager.getRessourcesTypes();
+       	request.setAttribute( "ressources", ressources );
         request.setAttribute( "pages", pages );
+        request.setAttribute( "types", types );
+
         if (link.length()>0) {             
         	request.setAttribute( "link", link );
         	System.out.println(link);

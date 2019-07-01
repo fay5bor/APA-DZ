@@ -160,3 +160,48 @@ jQuery.fn.putCursorAtEnd = function() {
 jQuery('#cody-info ul li').eq(1).on('click', function(){
 $('#cody-info').hide();
 });
+
+
+
+/*****/
+/* modal */
+jQuery(document).ready(function($){
+    var $form_modal = $('.my-modal'),
+        $form_container = $form_modal.find('.my-modal-container');
+    	$connect_item = $('.connect-item2');
+
+    //open modal
+    $connect_item.on('click', function(event){
+
+
+            //show modal layer
+            $form_modal.addClass('is-visible'); 
+            //show the selected form
+            filter_selected();
+        
+
+    });
+
+    //close modal
+    $('.my-modal').on('click', function(event){
+        if( $(event.target).is($form_modal) || $(event.target).is('.cd-close-form') ) {
+            $form_modal.removeClass('is-visible');
+        }   
+    });
+    //close modal when clicking the esc keyboard button
+    $(document).keyup(function(event){
+        if(event.which=='27'){
+            $form_modal.removeClass('is-visible');
+        }
+    });
+
+   
+
+    function filter_selected(){
+    	$form_container.addClass('is-selected');
+
+    }
+
+
+});
+

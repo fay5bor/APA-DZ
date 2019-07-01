@@ -8,6 +8,29 @@ import java.util.*;
 import java.sql.Statement;
 
 public class RessourceManager {
+	static public ArrayList<String> getRessourcesTypes() {
+		ArrayList<String> output = new ArrayList<String>();
+		ConnectDB connect = new ConnectDB();
+		Connection connection = null;
+		try {
+			connection = connect.getConnection();
+			// String byteImg="";
+			PreparedStatement ps = connection
+					.prepareStatement("SELECT nom FROM type");
+			ResultSet rs = ps.executeQuery();
+			while ( rs.next() ) {
+				output.add(rs.getString( "nom" ));
+	        }			
+			System.out.print(output);
+			rs.close();
+			ps.close();
+
+			return output;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
 	static public ArrayList<String> getRessourceGenById(int id) {
 		ArrayList<String> output = new ArrayList<String>();
 		ConnectDB connect = new ConnectDB();
@@ -39,7 +62,7 @@ public class RessourceManager {
 
 	
 
-	static public void addRessourceGen(String nom, String contenu, String type, byte[] img) {
+	static public void addRessourceGen(String nom, String contenu, int type, byte[] img) {
 		ConnectDB connect = new ConnectDB();
 		Connection connection = null;
 		try {
@@ -55,7 +78,7 @@ public class RessourceManager {
 			}
 			ps.setString(1, nom);
 			ps.setString(2, contenu);
-			ps.setString(3, type);
+			ps.setInt(3, type);
 
 			ps.executeUpdate();
 			ps.close();
@@ -111,7 +134,7 @@ public class RessourceManager {
 			connection = connect.getConnection();
 
 			for (int i=0; i<categoriesListSize;i++) {
-				whereClause+="type = ?";
+				whereClause+="type.nom = ?";
 				if (i<categoriesListSize-1)
 					whereClause+=" OR ";
 				
@@ -124,10 +147,11 @@ public class RessourceManager {
 					whereClause="Where ";
 				else 
 					whereClause+=" AND ";
-				whereClause+="to_tsvector('French', nom ) @@ to_tsquery( ? )";
+				whereClause+="( to_tsvector('French', Lower(ressource_gen.nom )) @@ to_tsquery( ? ) OR"
+						+ " Lower(ressource_gen.tags) LIKE ? OR Lower(ressource_gen.nom_communs) LIKE ? ) ";
 
 			}
-			query += "Select id_ressource, nom, type, image, update_date from ressource_gen \n"+
+			query += "Select DISTINCT id_ressource, ressource_gen.nom, type.nom as type, image, update_date from ressource_gen  inner join type on (ressource_gen.type= type.id_type) \n"+
 					 whereClause ;
 			
 			
@@ -161,8 +185,13 @@ public class RessourceManager {
 				i++;
 			}
 			if (search!= null &&  !search.isEmpty() ) {
-				ps.setString(i, search);
+				ps.setString(i, String.join(" & ", search.split(" ",0)).toLowerCase());
 				i++;
+				ps.setString(i, "%"+search.toLowerCase()+"%");
+				i++;
+				ps.setString(i, "%"+search.toLowerCase()+"%");
+				i++;
+
 			}
 			for (String region : regionsList) {
 				ps.setString(i, region);
@@ -210,7 +239,7 @@ public class RessourceManager {
 			connection = connect.getConnection();
 
 			for (int i=0; i<categoriesListSize;i++) {
-				whereClause+="type = ?";
+				whereClause+="type.nom = ?";
 				if (i<categoriesListSize-1)
 					whereClause+=" OR ";
 				
@@ -223,10 +252,10 @@ public class RessourceManager {
 					whereClause="Where ";
 				else 
 					whereClause+=" AND ";
-				whereClause+="to_tsvector('French', nom ) @@ to_tsquery( ? )";
+				whereClause+="to_tsvector('French', ressource_gen.nom ) @@ to_tsquery( ? )";
 
 			}
-			query += "Select id_ressource, nom, type, image, update_date from ressource_gen \n"+
+			query += "Select id_ressource, ressource_gen.nom, type.nom as type, image, update_date from ressource_gen  inner join type on (ressource_gen.type= type.id_type) \n"+
 					 whereClause ;
 			
 			

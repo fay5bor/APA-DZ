@@ -21,6 +21,7 @@ public class DocumentsAPA extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// TODO Auto-generated method stub
 		String search = request.getParameter("search");
 		String[] categories = request.getParameterValues("categorie");

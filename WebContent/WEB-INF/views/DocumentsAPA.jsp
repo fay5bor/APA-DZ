@@ -50,147 +50,17 @@
 }
 
 @media ( max-width : 575.98px) {
-	.card-list-catalogue
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	div
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	:not
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	 
-	
-	
-	
-	
-	
-	
-	
-	
-	(
-	:first-child
-	
-	
-	
-	
-	
-	
-	
-	
-	 
-	
-	
-	
-	
-	
-	
-	
-	
-	)
-	{
-	margin-top
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	:
-	
-	
-	
-	
-	
-	
-	
-	
-	 
-	
-	
-	
-	
-	
-	
-	
-	
-	35
-	px
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	;
+	.card-list-catalogue div :not (:first-child ){
+		margin-top: 35 px;
+	}
+	.search-bar-input {
+		width: 95% !important;
+	}
+	.mobile-filter-btn {
+		margin-left: -24px
+	}
 }
 
-.search-bar-input {
-	width: 95% !important;
-}
-
-.mobile-filter-btn {
-	margin-left: -24px
-}
-
-}
 @media ( min-width : 576px) and (max-width: 767.98px) {
 	.card-list-catalogue :nth-child(n+3) {
 		margin-top: 35px;
@@ -224,80 +94,7 @@
 	}
 }
 </style>
-<script type="text/javascript">
-	// The Browser API key obtained from the Google API Console.
-	// Replace with your own Browser API key, or your own key.
-	var developerKey = 'AIzaSyAmhurByVl_S6uFA0quDJ6WmIK2aBrzQuU';
 
-	// The Client ID obtained from the Google API Console. Replace with your own Client ID.
-	var clientId = "693560376524-5lt60s80hs3ktadv5ctm9jvdgcm6f3h6.apps.googleusercontent.com"
-
-	// Replace with your own project number from console.developers.google.com.
-	// See "Project number" under "IAM & Admin" > "Settings"
-	var appId = "72435351243";
-
-	// Scope to use to access user's Drive items.
-	var scope = [ 'https://www.googleapis.com/auth/drive' ];
-
-	var pickerApiLoaded = false;
-	var oauthToken;
-
-	// Use the Google API Loader script to load the google.picker script.
-	function onApiLoad() {
-		gapi.load('auth2', onAuthApiLoad);
-		gapi.load('picker', onPickerApiLoad);
-	}
-
-	function onAuthApiLoad() {
-		var authBtn = document.getElementById('auth');
-		authBtn.disabled = false;
-		authBtn.addEventListener('click', function() {
-			gapi.auth2.init({
-				client_id : clientId
-			}).then(function(googleAuth) {
-				googleAuth.signIn({
-					scope : scope
-				}).then(function(result) {
-					handleAuthResult(result.getAuthResponse());
-				})
-			})
-		});
-	}
-
-	function onPickerApiLoad() {
-		pickerApiLoaded = true;
-		createPicker();
-	}
-
-	function handleAuthResult(authResult) {
-		if (authResult && !authResult.error) {
-			oauthToken = authResult.access_token;
-			createPicker();
-		}
-	}
-
-	// Create and render a Picker object for searching images.
-	function createPicker() {
-		if (pickerApiLoaded && oauthToken) {
-			var picker = new google.picker.PickerBuilder().addView(
-					google.picker.ViewId).setOAuthToken(oauthToken)
-					.setDeveloperKey(developerKey).setCallback(pickerCallback)
-					.build();
-			picker.setVisible(true);
-		}
-	}
-
-	// A simple callback implementation.
-	function pickerCallback(data) {
-		var url = 'nothing';
-		if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
-			var doc = data[google.picker.Response.DOCUMENTS][0];
-			url = doc[google.picker.Document.URL];
-		}
-		var message = 'You picked: ' + url;
-		document.getElementById('result').innerHTML = message;
-	}
-</script>
 </head>
 
 <body>
@@ -324,8 +121,7 @@
 
 	<jsp:include page="parts/nav-bar2.jsp"></jsp:include>
 
-
-	<%-- <!--                     DocumentsAPA                                              -->
+	<!--                     DocumentsAPA                                              -->
 	<div class="m-4">
 		<!--                     Search                                              -->
 		<div class="row search-container">
@@ -351,38 +147,24 @@
 			<div class="row">
 				<div class="col-lg-10 col-md-12">
 					<c:if test="${fn:length(ressources) eq 0}">
-						<h1>Ressource introuvable</h1>
+						<h1>Pas de documents</h1>
 						<h4>Veuillez recherchez</h4>
 					</c:if>
-					<div
-						class="row mt-4 d-flex justiy-content-center card-list-catalogue">
-						<c:forEach items="${ressources}" var="ressource">
+					<div class="container">
+						<div
+							class="row mt-4 d-flex justiy-content-center card-list-catalogue">
+							<c:forEach items="${ressources}" var="ressource">
 
-							<div
-								class="col-lg-3 col-md-4 col-sm-6 col-7 offset-sm-0 offset-2">
-								<div class="card">
-									<img class="card-img-top" height="220px" width="260px"
-										src="data:image/png;base64,<c:out value="${ressource[2]}" />"
-										alt="Card image cap">
-									<div class="card-body">
-										<h5 class="card-title text-center">
-											<c:out value="${ressource[0]}" />
-										</h5>
-										<p class="card-text text-center">
-											<c:out value="${ressource[1]}" />
-										</p>
-										<div class="row">
-											<div class="col-2"></div>
-											<div class="col-8 ">
-												<button type="button" class="btn btn-primary btn-block">Détail</button>
-											</div>
-										</div>
+								<div
+									class="col-lg-3 col-md-4 col-sm-6 col-7 offset-sm-0 offset-2">
+									<div class="card rounded-pill">
+										<c:import url="parts/Fichier.jsp" />
 									</div>
 								</div>
-							</div>
-						</c:forEach>
+							</c:forEach>
+						</div>
 					</div>
-					<c:if test="${pages > 0}">
+					<%--	<c:if test="${pages > 0}">
 						<nav class="mt-5 d-flex align-items-center flex-column"
 							aria-label="Page navigation example">
 							<ul class="pagination">
@@ -440,8 +222,8 @@
 								</c:choose>
 
 							</ul>
-						</nav>
-					</c:if>
+						</nav> 
+					</c:if> --%>
 				</div>
 
 
@@ -449,15 +231,11 @@
 		</div>
 
 	</div>
-	<!--                     /DocumentsAPA                                              --> --%>
-	<button type="button" id="auth" disabled>Authenticate</button>
-	<div id="result"></div>
+	<!--                     /DocumentsAPA                                              -->
 
-	<!-- The Google API Loader script. -->
-	<script type="text/javascript"
-		src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
+	<!-- --------------------------------------- JavaScript --------------------------------------- -->
 	<script
-		src="${pageContext.request.contextPath}/ressources/vendors/popper/popper.min.js"></script>
+		src="${pageContext.request.contextPath}/ressources/js/java-script.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/ressources/vendors/jquery/jquery.min.js"></script>
 	<script
@@ -465,7 +243,7 @@
 	<script
 		src="${pageContext.request.contextPath}/ressources/vendors/bootstrap/js/bootstrap.min.js"></script>
 	<script
-		src="${pageContext.request.contextPath}/ressources/js/java-script.js"></script>
+		src="${pageContext.request.contextPath}/ressources/vendors/fontawesome-free/js/all.min.js"></script>
 
 </body>
 

@@ -146,25 +146,25 @@
 		<div class="">
 			<div class="row">
 				<div class="col-lg-10 col-md-12">
-					<c:if test="${fn:length(ressources) eq 0}">
+					<c:if test="${fn:length(documents) eq 0}">
 						<h1>Pas de documents</h1>
 						<h4>Veuillez recherchez</h4>
 					</c:if>
 					<div class="container">
 						<div
 							class="row mt-4 d-flex justiy-content-center card-list-catalogue">
-							<c:forEach items="${ressources}" var="ressource">
+							<c:forEach items="${documents}" var="ressource">
 
 								<div
-									class="col-lg-3 col-md-4 col-sm-6 col-7 offset-sm-0 offset-2">
-									<div class="card rounded-pill">
+									class="col-lg-4 col-md-4 col-sm-6 col-7 offset-sm-0 offset-2 m-2">
+									<div class="card" >
 										<c:import url="parts/Fichier.jsp" />
 									</div>
 								</div>
 							</c:forEach>
 						</div>
 					</div>
-					<%--	<c:if test="${pages > 0}">
+					<%--	<c:if test="${pages > 1}">
 						<nav class="mt-5 d-flex align-items-center flex-column"
 							aria-label="Page navigation example">
 							<ul class="pagination">

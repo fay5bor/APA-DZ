@@ -43,7 +43,7 @@ public class DocumentsAPA extends HttpServlet {
 		int perPage = 12;
 		
         
-        ArrayList<ArrayList<String>> ressources = RessourceManager.getPageRessources(perPage, page, search, categoriesList, regionsList);
+        ArrayList<ArrayList<String>> documents = RessourceManager.getPageRessources(perPage, page, search, categoriesList, regionsList);
         int pages = (int)(Math.ceil((double)RessourceManager.countRessources(search, categoriesList)/perPage)) ;
         String link = "";
         if (search!=null && search.length()>0) 
@@ -67,7 +67,7 @@ public class DocumentsAPA extends HttpServlet {
        		else 
        			link += "?"+regionFiltre.substring(0, regionFiltre.length() - 1);
 
-        request.setAttribute( "ressources", ressources );
+        request.setAttribute( "documents", documents );
         request.setAttribute( "pages", pages );
         if (link.length()>0) {             
 //        	request.setAttribute( "link", link );
